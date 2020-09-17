@@ -1,5 +1,6 @@
 import sublime
 import sublime_plugin
+from os.path import expanduser
 
 import time
 
@@ -73,12 +74,12 @@ class CustomEventListener(sublime_plugin.EventListener):
 
 	def on_close(self, view):
 		print(view.file_name(), "is no more")
-		f = open("/Users/miteshgandhi/Desktop/sublime_logs.txt", "a")
+		f = open(expanduser("~")+"/sublime_logs", "a")
 		f.write("Closing some file: " + str(view.file_name()) + " at time: " + str(time.time()) + "\n\n")  # noqa: E501
 		f.close()
 
 
-class ExampleCommand(sublime_plugin.TextCommand):
+class DashboardCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 
 		print(file_times_dict)
