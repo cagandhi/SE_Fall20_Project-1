@@ -1,9 +1,21 @@
-import sublime
 import sublime_plugin
-from os.path import expanduser
-
 import time
+import platform
+import os
 
+# create data folder based on OS
+if platform.system() == 'Windows':
+	DATA_FOLDER_PATH = os.path.join(os.getenv('APPDATA'), '.codeTime')
+else:
+	DATA_FOLDER_PATH = os.path.join(os.path.expanduser('~'), '.codeTime')
+
+if not os.path.exists(DATA_FOLDER_PATH):
+	os.makedirs(DATA_FOLDER_PATH)
+
+# define log file path
+LOG_FILE_PATH = os.path.join(DATA_FOLDER_PATH, '.sublime_logs')
+
+# define local variables
 file_times_dict = {}
 file_ext_lang_mapping = {}
 
@@ -25,10 +37,10 @@ def when_activated(view):
 			else:
 				file_times_dict[file_name].append([start_time, end_time])
 
-			print("File_name: ", file_name)
-			print("Project: ", project)
-			print("Folders: ", folders)
-			print("\n ----- \n")
+			print('File_name: ', file_name)
+			print('Project: ', project)
+			print('Folders: ', folders)
+			print('\n ----- \n')
 
 
 def when_deactivated(view):
@@ -43,46 +55,45 @@ def when_deactivated(view):
 
 class CustomEventListener(sublime_plugin.EventListener):
 	def on_load(self, view):
-		print(view.file_name(), "just got loaded")
+		print(view.file_name(), 'just got loaded')
 
 	def on_pre_save(self, view):
-		print(view.file_name(), "is about to be saved")
+		print(view.file_name(), 'is about to be saved')
 
 	def on_post_save(self, view):
-		print(view.file_name(), "just got saved")
+		print(view.file_name(), 'just got saved')
 
 	def on_new(self, view):
-		print("new file")
+		print('new file')
 
-	'''
+	"""
 	def on_modified(self, view):
-		print("\n ----- \n")
-		print(view.file_name(), "modified")
+		print('\n ----- \n')
+		print(view.file_name(), 'modified')
 		when_activated(view)
 
 	def on_modified_async(self, view):
 		when_activated(view)
-	'''
+	"""
 
 	def on_activated(self, view):
-		print(view.file_name(), "is now the active view")
+		print(view.file_name(), 'is now the active view')
 		when_activated(view)
 
 	def on_deactivated(self, view):
-		print(view.file_name(), "is deactivated view")
+		print(view.file_name(), 'is deactivated view')
 		when_deactivated(view)
 
 	def on_close(self, view):
-		print(view.file_name(), "is no more")
-		f = open(expanduser("~")+"/sublime_logs", "a")
-		f.write("Closing some file: " + str(view.file_name()) + " at time: " + str(time.time()) + "\n\n")  # noqa: E501
+		print(view.file_name(), 'is no more')
+		f = open(LOG_FILE_PATH, 'a')
+		f.write('Closing some file: ' + str(view.file_name()) + ' at time: ' + str(time.time()) + '\n')  # noqa: E501
 		f.close()
 
 
+# view.run_command('dashboard')
 class DashboardCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-
-		print(file_times_dict)
 
 		display_list = []
 
@@ -93,4 +104,5 @@ class DashboardCommand(sublime_plugin.TextCommand):
 
 			display_list.append([file_name, sum_seconds])
 
-		print(display_list)
+		for ele in display_list:
+			print(ele[0], ele[1])
