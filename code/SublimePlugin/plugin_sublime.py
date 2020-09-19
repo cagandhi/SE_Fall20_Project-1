@@ -3,6 +3,9 @@ import time
 import platform
 import os
 
+from datetime import datetime as dt
+
+
 # create data folder based on OS
 if platform.system() == 'Windows':
 	DATA_FOLDER_PATH = os.path.join(os.getenv('APPDATA'), '.codeTime')
@@ -17,7 +20,23 @@ LOG_FILE_PATH = os.path.join(DATA_FOLDER_PATH, '.sublime_logs')
 
 # define local variables
 file_times_dict = {}
-file_ext_lang_mapping = {}
+
+
+def write_log_file(file_times_dict):
+
+	f = open(LOG_FILE_PATH, 'a')
+
+	for key, val in file_times_dict.items():
+		curr_date = key
+		file_dict = val
+
+		for file_name, times_list in file_dict.items():
+			for time_start_end in times_list:
+				f.write(curr_date + ',' + file_name + ',' + str(time_start_end[0]) + ',' + str(time_start_end[1]) + '\n')  # noqa: E501
+
+	f.close()
+
+	return True
 
 
 def when_activated(view):
@@ -26,20 +45,20 @@ def when_activated(view):
 		file_name = view.file_name()
 
 		if file_name is not None:
-			project = window.project_data()
-			folders = window.folders()
-
 			start_time = time.time()
 			end_time = None
 
-			if file_name not in file_times_dict:
-				file_times_dict[file_name] = [[start_time, end_time]]
+			curr_date = dt.now().strftime('%Y-%m-%d')
+
+			if curr_date not in file_times_dict:
+				file_times_dict[curr_date] = {}
+
+			if file_name not in file_times_dict[curr_date]:
+				file_times_dict[curr_date][file_name] = [[start_time, end_time]]  # noqa: E501
 			else:
-				file_times_dict[file_name].append([start_time, end_time])
+				file_times_dict[curr_date][file_name].append([start_time, end_time])  # noqa: E501
 
 			print('File_name: ', file_name)
-			print('Project: ', project)
-			print('Folders: ', folders)
 			print('\n ----- \n')
 
 
@@ -50,31 +69,18 @@ def when_deactivated(view):
 
 		if file_name is not None:
 			end_time = time.time()
-			file_times_dict[file_name][-1][1] = end_time
+
+			curr_date = dt.now().strftime('%Y-%m-%d')
+
+			file_times_dict[curr_date][file_name][-1][1] = end_time
+
+			print('File_name: ', file_name)
+			print('\n ----- \n')
 
 
 class CustomEventListener(sublime_plugin.EventListener):
-	def on_load(self, view):
-		print(view.file_name(), 'just got loaded')
-
-	def on_pre_save(self, view):
-		print(view.file_name(), 'is about to be saved')
-
 	def on_post_save(self, view):
 		print(view.file_name(), 'just got saved')
-
-	def on_new(self, view):
-		print('new file')
-
-	"""
-	def on_modified(self, view):
-		print('\n ----- \n')
-		print(view.file_name(), 'modified')
-		when_activated(view)
-
-	def on_modified_async(self, view):
-		when_activated(view)
-	"""
 
 	def on_activated(self, view):
 		print(view.file_name(), 'is now the active view')
@@ -86,23 +92,30 @@ class CustomEventListener(sublime_plugin.EventListener):
 
 	def on_close(self, view):
 		print(view.file_name(), 'is no more')
-		f = open(LOG_FILE_PATH, 'a')
-		f.write('Closing some file: ' + str(view.file_name()) + ' at time: ' + str(time.time()) + '\n')  # noqa: E501
-		f.close()
+
+		file_name = view.file_name()
+		curr_date = dt.now().strftime('%Y-%m-%d')
+
+		if file_name is not None and file_name in file_times_dict[curr_date]:
+			end_time = time.time()
+
+			last_time_list = file_times_dict[curr_date][file_name][-1]
+
+			if last_time_list[1] is None:
+				last_time_list[1] = end_time
+
+			with open(LOG_FILE_PATH, 'a') as f:
+				f.write(curr_date + ',' + file_name + ',' + str(last_time_list[0]) + ',' + str(last_time_list[1]) + '\n')  # noqa: E501
 
 
 # view.run_command('dashboard')
 class DashboardCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 
-		display_list = []
+		for key, val in file_times_dict.items():
+			curr_date = key
+			file_dict = val
 
-		for file_name, times_list in file_times_dict.items():
-			sum_seconds = 0
-			for time_start_end in times_list:
-				sum_seconds += time_start_end[1] - time_start_end[0]
-
-			display_list.append([file_name, sum_seconds])
-
-		for ele in display_list:
-			print(ele[0], ele[1])
+			for file_name, times_list in file_dict.items():
+				for time_start_end in times_list:
+					print(curr_date + ' -||- ' + file_name + ' -||- ' + str(time_start_end[0]) + ' -||- ' + str(time_start_end[1]) + '\n')  # noqa: E501
