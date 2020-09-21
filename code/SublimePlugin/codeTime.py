@@ -23,9 +23,9 @@ LOG_FILE_PATH = os.path.join(DATA_FOLDER_PATH, '.sublime_logs')
 file_times_dict = {}
 
 
-def write_log_file(file_times_dict):
+def write_log_file(file_times_dict, file_path=LOG_FILE_PATH):
 
-	f = open(LOG_FILE_PATH, 'a')
+	f = open(file_path, 'a')
 
 	for key, val in file_times_dict.items():
 		curr_date = key
