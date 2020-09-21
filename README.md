@@ -9,10 +9,9 @@ In a nutshell, this is an extension for text editors which would let developers 
 
 ### How to setup this plugin?
 
-1. Let's say path1 = '<your github repo path/SE_Fall20_Project-1>'
-2. Open terminal, move to path1
-3. Open sublime text.
-4. Go to preferrences -> Browse packages.
-5. A window new containing Sublime packages will open up.
-6. Get path2 = '<Sublime packages path/Packages>'
-7. On terminal, run command: 'ln -s "path1/code/SublimePlugin" "path2/SublimePlugin"'. (Note: keep the path names inside double quotes).
+- Let's say: `path1` = `<path to root of this github repo>`
+- Open sublime text.
+- Go to preferrences -> Browse packages.
+- A window new containing Sublime packages will open up. Let's call this folder `SublimePackagesFolder`.
+- Open terminal and go to `SublimePackagesFolder`.
+- Run command: `ln -s "<path1>/code/SublimePlugin" "CodeTime"`. (Note: keep the path names inside double quotes).
