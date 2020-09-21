@@ -25,23 +25,6 @@ file_times_dict = {}
 periodic_log_save_timeout = 300 #seconds
 periodic_log_save_on = True
 
-# remove this function
-def write_log_file(file_times_dict, file_path=LOG_FILE_PATH):
-
-	f = open(file_path, 'a')
-
-	for key, val in file_times_dict.items():
-		curr_date = key
-		file_dict = val
-
-		for file_name, times_list in file_dict.items():
-			for time_start_end in times_list:
-				f.write(curr_date + ',' + file_name + ',' + str(time_start_end[0]) + ',' + str(time_start_end[1]) + '\n')  # noqa: E501
-
-	f.close()
-
-	return True
-
 
 def when_activated(view):
 	try:
