@@ -21,6 +21,8 @@ LOG_FILE_PATH = os.path.join(DATA_FOLDER_PATH, '.sublime_logs')
 
 # define local variables
 file_times_dict = {}
+periodic_log_save_timeout = 300 #seconds
+periodic_log_save_on = True
 
 
 def write_log_file(file_times_dict):
@@ -123,5 +125,6 @@ class DashboardCommand(sublime_plugin.TextCommand):
 
 
 def plugin_loaded():
-	periodcLogSaver = PeriodicLogSaver(kwargs={'inMemoryLog':file_times_dict, 'timeout':10, 'LOG_FILE_PATH': LOG_FILE_PATH})
-	periodcLogSaver.start()
+	if periodic_log_save_on:
+		periodcLogSaver = PeriodicLogSaver(kwargs={'inMemoryLog':file_times_dict, 'timeout':periodic_log_save_timeout, 'LOG_FILE_PATH': LOG_FILE_PATH})
+		periodcLogSaver.start()
