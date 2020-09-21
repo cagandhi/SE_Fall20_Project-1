@@ -55,6 +55,7 @@ def when_activated(view):
 
 def when_deactivated(view):
 	try:
+		
 		window = view.window()
 		if window is not None:
 			file_name = view.file_name()
