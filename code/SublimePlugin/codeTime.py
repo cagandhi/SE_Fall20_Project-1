@@ -4,6 +4,7 @@ import platform
 import os
 from datetime import datetime as dt
 import threading
+import sys
 
 from .periodicLogSaver import PeriodicLogSaver
 
@@ -21,45 +22,56 @@ LOG_FILE_PATH = os.path.join(DATA_FOLDER_PATH, '.sublime_logs')
 
 # define local variables
 file_times_dict = {}
+periodic_log_save_timeout = 300 #seconds
+periodic_log_save_on = True
 
 
 def when_activated(view):
-	window = view.window()
-	if window is not None:
-		file_name = view.file_name()
+	try:
+		window = view.window()
+		if window is not None:
+			file_name = view.file_name()
 
-		if file_name is not None:
-			start_time = time.time()
-			end_time = None
+			if file_name is not None:
+				start_time = time.time()
+				end_time = None
 
-			curr_date = dt.now().strftime('%Y-%m-%d')
+				curr_date = dt.now().strftime('%Y-%m-%d')
 
-			if curr_date not in file_times_dict:
-				file_times_dict[curr_date] = {}
+				if curr_date not in file_times_dict:
+					file_times_dict[curr_date] = {}
 
-			if file_name not in file_times_dict[curr_date]:
-				file_times_dict[curr_date][file_name] = [[start_time, end_time]]  # noqa: E501
-			else:
-				file_times_dict[curr_date][file_name].append([start_time, end_time])  # noqa: E501
+				if file_name not in file_times_dict[curr_date]:
+					file_times_dict[curr_date][file_name] = [[start_time, end_time]]  # noqa: E501
+				else:
+					file_times_dict[curr_date][file_name].append([start_time, end_time])  # noqa: E501
 
-			print('File_name: ', file_name)
-			print('\n ----- \n')
+				print('File_name: ', file_name)
+				print('\n ----- \n')
+	except Exception as e:
+		exc_type, exc_obj, exc_tb = sys.exc_info()
+		print("codeTime:when_activated(): %s on line number: %s", str(e), str(exc_tb.tb_lineno))
 
 
 def when_deactivated(view):
-	window = view.window()
-	if window is not None:
-		file_name = view.file_name()
+	try:
+		window = view.window()
+		if window is not None:
+			file_name = view.file_name()
 
-		if file_name is not None:
-			end_time = time.time()
+			if file_name is not None:
+				end_time = time.time()
 
-			curr_date = dt.now().strftime('%Y-%m-%d')
+				curr_date = dt.now().strftime('%Y-%m-%d')
 
-			file_times_dict[curr_date][file_name][-1][1] = end_time
+				file_times_dict[curr_date][file_name][-1][1] = end_time
 
-			print('File_name: ', file_name)
-			print('\n ----- \n')
+				print('File_name: ', file_name)
+				print('\n ----- \n')
+	except Exception as e:
+		exc_type, exc_obj, exc_tb = sys.exc_info()
+		print("codeTime:when_deactivated(): %s on line number: %s", str(e), str(exc_tb.tb_lineno))
+
 
 
 class CustomEventListener(sublime_plugin.EventListener):
@@ -67,44 +79,68 @@ class CustomEventListener(sublime_plugin.EventListener):
 		print(view.file_name(), 'just got saved')
 
 	def on_activated(self, view):
-		print(view.file_name(), 'is now the active view')
-		when_activated(view)
+		try:
+			print(view.file_name(), 'is now the active view')
+			when_activated(view)
+		except Exception as e:
+			exc_type, exc_obj, exc_tb = sys.exc_info()
+			print("codeTime:CustomEventListener():on_activated() %s on line number: %s", str(e), str(exc_tb.tb_lineno))
+
 
 	def on_deactivated(self, view):
-		print(view.file_name(), 'is deactivated view')
-		when_deactivated(view)
+		try:
+			print(view.file_name(), 'is deactivated view')
+			when_deactivated(view)
+		except Exception as e:
+			exc_type, exc_obj, exc_tb = sys.exc_info()
+			print("codeTime:CustomEventListener():on_deactivated() %s on line number: %s", str(e), str(exc_tb.tb_lineno))
+
 
 	def on_close(self, view):
-		print(view.file_name(), 'is no more')
+		try:
+			print(view.file_name(), 'is no more')
 
-		file_name = view.file_name()
-		curr_date = dt.now().strftime('%Y-%m-%d')
+			file_name = view.file_name()
+			curr_date = dt.now().strftime('%Y-%m-%d')
+			if file_name is not None and file_name in file_times_dict[curr_date]:
+				end_time = time.time()
 
-		if file_name is not None and file_name in file_times_dict[curr_date]:
-			end_time = time.time()
+				last_time_list = file_times_dict[curr_date][file_name][-1]
 
-			last_time_list = file_times_dict[curr_date][file_name][-1]
+				if last_time_list[1] is None:
+					last_time_list[1] = end_time
 
-			if last_time_list[1] is None:
-				last_time_list[1] = end_time
-
-			with open(LOG_FILE_PATH, 'a') as f:
-				f.write(curr_date + ',' + file_name + ',' + str(last_time_list[0]) + ',' + str(last_time_list[1]) + '\n')  # noqa: E501
+				with open(LOG_FILE_PATH, 'a') as f:
+					for _time in file_times_dict[curr_date][file_name]:
+						f.write(curr_date + ',' + file_name + ',' + str(_time[0]) + ',' + str(_time[1]) + '\n')  # noqa: E501
+				file_times_dict[curr_date].pop(file_name,None)
+		except Exception as e:
+			exc_type, exc_obj, exc_tb = sys.exc_info()
+			print("codeTime:CustomEventListener():on_close() %s on line number: %s", str(e), str(exc_tb.tb_lineno))
 
 
 # view.run_command('dashboard')
 class DashboardCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
+		try:
+			for key, val in file_times_dict.items():
+				curr_date = key
+				file_dict = val
 
-		for key, val in file_times_dict.items():
-			curr_date = key
-			file_dict = val
+				for file_name, times_list in file_dict.items():
+					for time_start_end in times_list:
+						print(curr_date + ' -||- ' + file_name + ' -||- ' + str(time_start_end[0]) + ' -||- ' + str(time_start_end[1]) + '\n')  # noqa: E501
+		except Exception as e:
+			exc_type, exc_obj, exc_tb = sys.exc_info()
+			print("codeTime:DashboardCommand():run() %s on line number: %s", str(e), str(exc_tb.tb_lineno))
 
-			for file_name, times_list in file_dict.items():
-				for time_start_end in times_list:
-					print(curr_date + ' -||- ' + file_name + ' -||- ' + str(time_start_end[0]) + ' -||- ' + str(time_start_end[1]) + '\n')  # noqa: E501
 
 
 def plugin_loaded():
-	periodcLogSaver = PeriodicLogSaver(kwargs={'inMemoryLog':file_times_dict, 'timeout':10, 'LOG_FILE_PATH': LOG_FILE_PATH})
-	periodcLogSaver.start()
+	try:
+		if periodic_log_save_on:
+			periodcLogSaver = PeriodicLogSaver(kwargs={'inMemoryLog':file_times_dict, 'timeout':periodic_log_save_timeout, 'LOG_FILE_PATH': LOG_FILE_PATH})
+			periodcLogSaver.start()
+	except Exception as e:
+		exc_type, exc_obj, exc_tb = sys.exc_info()
+		print("codeTime:plugin_loaded() %s on line number: %s", str(e), str(exc_tb.tb_lineno))
