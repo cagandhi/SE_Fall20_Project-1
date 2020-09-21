@@ -2,9 +2,10 @@ import sublime_plugin
 import time
 import platform
 import os
-
 from datetime import datetime as dt
+import threading
 
+from .periodicLogSaver import PeriodicLogSaver
 
 # create data folder based on OS
 if platform.system() == 'Windows':
@@ -119,3 +120,8 @@ class DashboardCommand(sublime_plugin.TextCommand):
 			for file_name, times_list in file_dict.items():
 				for time_start_end in times_list:
 					print(curr_date + ' -||- ' + file_name + ' -||- ' + str(time_start_end[0]) + ' -||- ' + str(time_start_end[1]) + '\n')  # noqa: E501
+
+
+def plugin_loaded():
+	periodcLogSaver = PeriodicLogSaver(kwargs={'inMemoryLog':file_times_dict, 'timeout':10, 'LOG_FILE_PATH': LOG_FILE_PATH})
+	periodcLogSaver.start()
