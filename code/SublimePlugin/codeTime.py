@@ -65,7 +65,7 @@ def when_activated(view):
 
 				print('File_name: ', file_name)
 				print('\n ----- \n')
-	except Excepion as e:
+	except Exception as e:
 		exc_type, exc_obj, exc_tb = sys.exc_info()
 		print("codeTime:when_activated(): %s on line number: %s", str(e), str(exc_tb.tb_lineno))
 
@@ -85,7 +85,7 @@ def when_deactivated(view):
 
 				print('File_name: ', file_name)
 				print('\n ----- \n')
-	except Excepion as e:
+	except Exception as e:
 		exc_type, exc_obj, exc_tb = sys.exc_info()
 		print("codeTime:when_deactivated(): %s on line number: %s", str(e), str(exc_tb.tb_lineno))
 
@@ -99,7 +99,7 @@ class CustomEventListener(sublime_plugin.EventListener):
 		try:
 			print(view.file_name(), 'is now the active view')
 			when_activated(view)
-		except Excepion as e:
+		except Exception as e:
 			exc_type, exc_obj, exc_tb = sys.exc_info()
 			print("codeTime:CustomEventListener():on_activated() %s on line number: %s", str(e), str(exc_tb.tb_lineno))
 
@@ -108,7 +108,7 @@ class CustomEventListener(sublime_plugin.EventListener):
 		try:
 			print(view.file_name(), 'is deactivated view')
 			when_deactivated(view)
-		except Excepion as e:
+		except Exception as e:
 			exc_type, exc_obj, exc_tb = sys.exc_info()
 			print("codeTime:CustomEventListener():on_deactivated() %s on line number: %s", str(e), str(exc_tb.tb_lineno))
 
@@ -119,8 +119,6 @@ class CustomEventListener(sublime_plugin.EventListener):
 
 			file_name = view.file_name()
 			curr_date = dt.now().strftime('%Y-%m-%d')
-			print(file_name)
-			print(file_times_dict)
 			if file_name is not None and file_name in file_times_dict[curr_date]:
 				end_time = time.time()
 
@@ -130,8 +128,10 @@ class CustomEventListener(sublime_plugin.EventListener):
 					last_time_list[1] = end_time
 
 				with open(LOG_FILE_PATH, 'a') as f:
-					f.write(curr_date + ',' + file_name + ',' + str(last_time_list[0]) + ',' + str(last_time_list[1]) + '\n')  # noqa: E501
-		except Excepion as e:
+					for _time in file_times_dict[curr_date][file_name]:
+						f.write(curr_date + ',' + file_name + ',' + str(_time[0]) + ',' + str(_time[1]) + '\n')  # noqa: E501
+				file_times_dict[curr_date].pop(file_name,None)
+		except Exception as e:
 			exc_type, exc_obj, exc_tb = sys.exc_info()
 			print("codeTime:CustomEventListener():on_close() %s on line number: %s", str(e), str(exc_tb.tb_lineno))
 
@@ -147,7 +147,7 @@ class DashboardCommand(sublime_plugin.TextCommand):
 				for file_name, times_list in file_dict.items():
 					for time_start_end in times_list:
 						print(curr_date + ' -||- ' + file_name + ' -||- ' + str(time_start_end[0]) + ' -||- ' + str(time_start_end[1]) + '\n')  # noqa: E501
-		except Excepion as e:
+		except Exception as e:
 			exc_type, exc_obj, exc_tb = sys.exc_info()
 			print("codeTime:DashboardCommand():run() %s on line number: %s", str(e), str(exc_tb.tb_lineno))
 
@@ -158,6 +158,6 @@ def plugin_loaded():
 		if periodic_log_save_on:
 			periodcLogSaver = PeriodicLogSaver(kwargs={'inMemoryLog':file_times_dict, 'timeout':periodic_log_save_timeout, 'LOG_FILE_PATH': LOG_FILE_PATH})
 			periodcLogSaver.start()
-	except Excepion as e:
+	except Exception as e:
 		exc_type, exc_obj, exc_tb = sys.exc_info()
 		print("codeTime:plugin_loaded() %s on line number: %s", str(e), str(exc_tb.tb_lineno))

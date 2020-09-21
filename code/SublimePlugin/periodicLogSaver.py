@@ -40,7 +40,7 @@ class PeriodicLogSaver(threading.Thread):
 
 						self.write_log_file(inMemoryLogDeepCopy)
 				time.sleep(self.kwargs['timeout'])
-			except Excepion as e:
+			except Exception as e:
 				exc_type, exc_obj, exc_tb = sys.exc_info()
 				print("periodicLogSaver:PeriodicLogSaver:run(): %s on line number: %s", str(e), str(exc_tb.tb_lineno))
 
