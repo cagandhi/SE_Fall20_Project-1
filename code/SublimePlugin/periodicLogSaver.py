@@ -19,11 +19,25 @@ class PeriodicLogSaver(threading.Thread):
 			
 			curr_file = sublime.active_window().active_view().file_name()
 			curr_date = dt.now().strftime('%Y-%m-%d')
-			inMemoryLogDeepCopy=copy.deepcopy(self.kwargs['inMemoryLog'])
-			inMemoryLog=self.kwargs['inMemoryLog']
-			inMemoryLog.clear()
 
-			self.write_log_file(inMemoryLogDeepCopy)
+			if curr_file is not None:
+				inMemoryLogDeepCopy=copy.deepcopy(self.kwargs['inMemoryLog'])
+				inMemoryLog=self.kwargs['inMemoryLog']
+				inMemoryLog.clear()
+
+				if curr_date in inMemoryLogDeepCopy and curr_file in inMemoryLogDeepCopy[curr_date]:
+					end_time=time.time()
+					inMemoryLogDeepCopy[curr_date][curr_file][-1][1]=end_time
+
+					if curr_date not in inMemoryLog:
+						inMemoryLog[curr_date] = {}
+
+					if curr_file not in inMemoryLog[curr_date]:
+						inMemoryLog[curr_date][curr_file] = [[end_time, None]]
+					# else: # do we need this?
+					# 	inMemoryLog[curr_date][curr_file].append([start_time, end_time])
+
+					self.write_log_file(inMemoryLogDeepCopy)
 			time.sleep(self.kwargs['timeout'])
 
 	def write_log_file(self, file_times_dict):
