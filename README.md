@@ -14,9 +14,15 @@ In a nutshell, this is an extension for text editors which would let developers 
 
 ### How to setup this plugin?
 
-- Let's say: `path1` = `<path to root of this github repo>`
 - Open sublime text.
 - Go to preferrences -> Browse packages.
-- A window new containing Sublime packages will open up. Let's call this folder `SublimePackagesFolder`.
+- A new window containing Sublime packages will open up. Let's call this folder `SublimePackagesFolder`.
 - Open terminal and go to `SublimePackagesFolder`.
-- Run command: `ln -s "<path1>/code/SublimePlugin" "CodeTime"`. (Note: keep the path names inside double quotes).
+- Clone this repository inside `SublimePackagesFolder`. (This makes sure that Sublime recongnizes our plugin package to execute)
+
+### How to check if the plugin is working?
+
+- Once the repository is cloned in `SublimePackagesFolder`, Open sublime text.
+- Open a project/file the you wish to work on.
+- Go to `View` -> `Show Console`.
+- Now at every action (open, save, switching file), you should be able to see corresponding log entries in console.
