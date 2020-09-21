@@ -46,22 +46,16 @@ class PeriodicLogSaver(threading.Thread):
 
 	def write_log_file(self, file_times_dict):
 		try:
-			f = None
-			f = open(self.kwargs['LOG_FILE_PATH'], 'a')
 
-			for key, val in file_times_dict.items():
-				curr_date = key
-				file_dict = val
+			with open(self.kwargs['LOG_FILE_PATH'], 'a') as f:
+				for key, val in file_times_dict.items():
+					curr_date = key
+					file_dict = val
 
-				for file_name, times_list in file_dict.items():
-					for time_start_end in times_list:
-						f.write(curr_date + ',' + file_name + ',' + str(time_start_end[0]) + ',' + str(time_start_end[1]) + '\n')  # noqa: E501
+					for file_name, times_list in file_dict.items():
+						for time_start_end in times_list:
+							f.write(curr_date + ',' + file_name + ',' + str(time_start_end[0]) + ',' + str(time_start_end[1]) + '\n')  # noqa: E501
 
-			f.close()
 		except Exception as e:
-			if f:
-				f.close()
 			exc_type, exc_obj, exc_tb = sys.exc_info()
 			print("periodicLogSaver:PeriodicLogSaver():write_log_file(): {error} on line number: {lno}".format( error = str(e), lno = str(exc_tb.tb_lineno)))
-
-		return True
