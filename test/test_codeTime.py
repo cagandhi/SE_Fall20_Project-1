@@ -24,3 +24,5 @@ class TestFunctions(TestCase):
 		view = Mock()		
 		view.file_name.return_value = "sample.txt"
 		curr_date = dt.now().strftime('%Y-%m-%d')
+		codeTime.file_times_dict[curr_date] = {'sample.txt':["1234", None]}
+		view.assert_called_once()
