@@ -8,7 +8,7 @@ def get_requirements(filename):
         requirements = f.read().splitlines()
     return requirements
 
-setup(name='sample package',
+setup(name='codeTime',
       version='1.0',
       description='CSC 510: Software Engineering Project 1',
       author='Omkar Kulkarni',
