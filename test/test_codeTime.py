@@ -21,3 +21,6 @@ class TestFunctions(TestCase):
 		view.window.assert_called_once()
 
 	def test_when_deactivated(self):
+		view = Mock()		
+		view.file_name.return_value = "sample.txt"
+		curr_date = dt.now().strftime('%Y-%m-%d')
