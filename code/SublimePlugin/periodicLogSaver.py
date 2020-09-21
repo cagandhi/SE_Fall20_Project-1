@@ -42,7 +42,7 @@ class PeriodicLogSaver(threading.Thread):
 				time.sleep(self.kwargs['timeout'])
 			except Exception as e:
 				exc_type, exc_obj, exc_tb = sys.exc_info()
-				print("periodicLogSaver:PeriodicLogSaver:run(): %s on line number: %s", str(e), str(exc_tb.tb_lineno))
+				print("periodicLogSaver:PeriodicLogSaver:run(): {error} on line number: {lno}".format( error = str(e), lno = str(exc_tb.tb_lineno)))
 
 	def write_log_file(self, file_times_dict):
 		try:
@@ -62,6 +62,6 @@ class PeriodicLogSaver(threading.Thread):
 			if f:
 				f.close()
 			exc_type, exc_obj, exc_tb = sys.exc_info()
-			print("periodicLogSaver:PeriodicLogSaver():write_log_file(): %s on line number: %s", str(e), str(exc_tb.tb_lineno))
+			print("periodicLogSaver:PeriodicLogSaver():write_log_file(): {error} on line number: {lno}".format( error = str(e), lno = str(exc_tb.tb_lineno)))
 
 		return True
