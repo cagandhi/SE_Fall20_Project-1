@@ -19,3 +19,5 @@ class TestFunctions(TestCase):
 		datetime = Mock()
 		codeTime.when_activated(view)
 		view.window.assert_called_once()
+
+	def test_when_deactivated(self):
