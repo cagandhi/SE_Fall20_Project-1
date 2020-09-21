@@ -29,5 +29,9 @@ class TestPeriodicLogSaver(TestCase):
 				for ele in times_arr:
 					str1 = local_date + ',' + filenm + ',' + str(ele[0]) + ',' + str(ele[1]) + '\n'  # noqa: E501
 					arr.append(str1)
+
+		with open(FILE_PATH, 'r') as f:
+			lines = f.readlines()
+			self.assertEqual(lines, arr)
 	finally:
 		os.remove(FILE_PATH)
