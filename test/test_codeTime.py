@@ -12,5 +12,10 @@ codeTime = sys.modules["SE_Fall20_Project-1.codeTime"]
 
 class TestFunctions(TestCase):
 
-	def test_write_log_file(self):
-		pass
+	@patch('time.time', return_value=100)
+	def test_when_activated(self, mock_time):
+		view = Mock()
+		view.filename.return_value = "sample.txt"
+		datetime = Mock()
+		codeTime.when_activated(view)
+		view.window.assert_called_once()
