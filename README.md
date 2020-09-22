@@ -16,7 +16,7 @@
 
 [Project Requirement](https://github.com/oaaky/SE_Fall20_Project-1/blob/master/project_requiremnt.md) | [Architecture Diagram](https://github.com/oaaky/SE_Fall20_Project-1/blob/master/architecure.png) | [UI MockUps](https://github.com/oaaky/SE_Fall20_Project-1/blob/master/Capture.PNG)
 
-[![CodeTime Promo Video](https://img.youtube.com/vi/CL5W7C9Jw_c/0.jpg)](https://www.youtube.com/watch?v=CL5W7C9Jw_c)
+[![CodeTime Promo Video](https://img.youtube.com/vi/CL5W7C9Jw_c/0.jpg)](http://tiny.cc/codeTimePromo)
 
 
 ## Installation (For non-contributors)
