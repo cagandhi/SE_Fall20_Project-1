@@ -41,7 +41,30 @@
 
 ## Setup (For contributors)
 
+1. Perform the steps in the [Installation](https://github.com/oaaky/SE_Fall20_Project-1#installation-for-non-contributors) section described above.
+2. Install Package Control by pressing `ctrl+shift+p (Win/Linux)` or `cmd+shift+p (Mac)`.
+3. Run `python setup.py install` to install all the dependencies.
+4. Back in Sublime Text, Open Package Control by pressing `ctrl+shift+p (Win/Linux)` or `cmd+shift+p (Mac)`. Navigate to option `Package Control: Install Package`. Install  packages: `SublimeLinter`, `SublimeLinter-flake8`, `sublack`, `UnitTesting`.
+5. Navigate to `Package Settings` option under `Preferences` in Menu bar. For `Mac` users, the `Preferences` option will be found under `Sublime Text` in Menu bar.
+6. Once under Package Settings, move to `SublimeLinter > Settings`. You will see that a file with the name `SublimeLinter.sublime-settings - User` opens up. Copy the following code snippet to ignore a linting error related to Tabs vs Spaces war :)
+```
+// SublimeLinter Settings - User
+{
+    "linters": {
+        "flake8": {
+            "args": ["--ignore=W191"],
+        }
+    }
+}
 
+```
+
+## How to Run Tests?
+
+1. For local execution of the tests, make sure that the Sublime package `UnitTesting` is installed. 
+2. Navigate to a test file in `tests` folder that you want to run your tests for. 
+3. Open Package Control and type in `UnitTesting: Test Current Package`. 
+4. The tests will run and a small output panel pops up showing that the tests are running.
 
 ## How to Contribute? (For contributing developers)
 
