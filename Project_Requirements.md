@@ -1,10 +1,11 @@
-## Project Requirements: .
+## Project Requirements
 
-1. The plugin should record the following data.
+1. The plugin should record the following data:
 *  Time spent on a specific file
 *  Time spent on a specific programming language.
 *  Time spent on specific project. 
-2. The plugin should produce following results:
+
+2. The plugin should produce the following results:
 *  Rank the time spent on different programming languages
 *  Display the time spent on coding per hour on a daily basis.
 *  Display the time spent on different files. Rank the files based on time spent and show the amount of time spent in percentage.
