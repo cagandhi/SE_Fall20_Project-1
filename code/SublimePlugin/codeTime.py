@@ -123,6 +123,7 @@ class DashboardCommand(sublime_plugin.TextCommand):
 			print("Showing Graphs")
 			dir_path = os.path.dirname(os.path.realpath(__file__))
 			process = subprocess.Popen("python3 '" + dir_path + "/output.py'", shell=True, stdout=subprocess.PIPE)  # noqa: E501, F841
+			# if the above line doesn't work, replace 'python3' with actual executable path of your python3 (for contributors)
 		except Exception as e:
 			exc_type, exc_obj, exc_tb = sys.exc_info()
 			print("codeTime:DashboardCommand():run() {error} on line number: {lno}".format(error=str(e), lno=str(exc_tb.tb_lineno)))  # noqa: E501

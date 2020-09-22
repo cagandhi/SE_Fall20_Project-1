@@ -14,7 +14,7 @@
 
 - The developer can add the project deadlines to the plugin and the plugin can help developers stick to their goal by predicting the finish time of the project based on the data gathered from the user. Multiple developers can compete with each other through a leaderboard where a leaderboard will display the ranking of most productive developer and admin/manager can easily monitor the productivity of each and every developer with the help of a common interface.
 
-[Project Requirement](https://github.com/oaaky/SE_Fall20_Project-1/blob/master/project_requiremnt.md) | [Architecture Diagram](https://github.com/oaaky/SE_Fall20_Project-1/blob/master/architecure.png) | [UI MockUps](https://github.com/oaaky/SE_Fall20_Project-1/blob/master/Capture.PNG)
+[Project Requirement](https://github.com/oaaky/SE_Fall20_Project-1/blob/master/project_requiremnt.md) | [Architecture Diagram](https://github.com/oaaky/SE_Fall20_Project-1/blob/master/architecure.png) | [UI MockUps](https://github.com/oaaky/SE_Fall20_Project-1/blob/master/Capture.PNG) | [Current Working Dashboard](https://github.com/oaaky/SE_Fall20_Project-1/blob/master/CodeTimeDashboard.png)
 
 [![CodeTime Promo Video](https://img.youtube.com/vi/CL5W7C9Jw_c/0.jpg)](http://tiny.cc/codeTimePromo)
 
@@ -75,7 +75,7 @@ Please take a look at our CONTRIBUTING.md where we provide instructions on contr
 ## What things have been done for Phase 1 ?
 - Created the design and architecture of the project
 - Implemented the logic to collect the data in background
-- Implemented the code to generate the graphs to analyse the time spent
+- Implemented the code to generate the graphs to analyse the time spent. ([Current Working Dashboard](https://github.com/oaaky/SE_Fall20_Project-1/blob/master/CodeTimeDashboard.png))
 - Integrated the code with sublime text editor
 - Unit tests
 - Build and Packaging of the plugin
