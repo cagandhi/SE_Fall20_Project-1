@@ -38,16 +38,9 @@
 
 ## Setup (For contributors)
 
-* Project Requirement
-### How to setup this plugin?
-
 ## How to Contribute? (For contributing developers)
 
 Please take a look at our CONTRIBUTING.md where we provide instructions on contributing to the repo and taking the plugin development further.
-- Once the repository is cloned in `SublimePackagesFolder`, Open sublime text.
-- Open a project/file the you wish to work on.
-- Go to `View` -> `Show Console`.
-- Now at every action (open, save, switching file), you should be able to see corresponding log entries in console.
 
 ### What things are planned for Phase 2?
 
