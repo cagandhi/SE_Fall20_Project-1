@@ -117,7 +117,7 @@ class CustomEventListener(sublime_plugin.EventListener):
 
         print("Showing Graphs")
         dir_path = os.path.dirname(os.path.realpath(__file__))
-        process = subprocess.Popen("python '"+dir_path+"/output.py'", shell=True)
+        process = subprocess.Popen("python '"+dir_path+"/output.py'", shell=True, stdout=subprocess.PIPE)
     
 # view.run_command('dashboard')
 class DashboardCommand(sublime_plugin.TextCommand):
