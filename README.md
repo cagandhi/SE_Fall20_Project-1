@@ -10,7 +10,7 @@
 
 ## About CodeTime
 
-- CodeTime is a plugin for Sublime Text editor which will help developers to track the amount of time spent on multiple files, programming languages and projects. The user will be able to perform the analysis of the time spent to improve the productivity by analysing the most frequently used programming language, most productive time of the day, files in project which took maximum time for development and projects which took maximum time for completion. 
+- CodeTime is a plugin for Sublime Text editor which will help developers to track the amount of time spent on multiple files, programming languages and projects. The user will be able to perform the analysis of the time spent to improve the productivity by analysing the most frequently used programming language, most productive time of the day, files in project which took maximum time for development and projects which took maximum time for completion.
 
 - The developer can add the project deadlines to the plugin and the plugin can help developers stick to their goal by predicting the finish time of the project based on the data gathered from the user. Multiple developers can compete with each other through a leaderboard where a leaderboard will display the ranking of most productive developer and admin/manager can easily monitor the productivity of each and every developer with the help of a common interface.
 
@@ -35,14 +35,18 @@
 2. Open a file that you wish to work on.
 3. In the file pane, right click and select the option `View CodeTime Dashboard`.
 
-<!-- 3. Go to `View` -> `Show Console`. -->
-<!-- 4. Now at every action (open, save, switching file), you should be able to see corresponding log entries in console. -->
-
 
 ## Setup (For contributors)
-
-
 
 ## How to Contribute? (For contributing developers)
 
 Please take a look at our CONTRIBUTING.md where we provide instructions on contributing to the repo and taking the plugin development further.
+
+### What things are planned for Phase 2?
+
+- The data generated will be sent to server.
+- Local data analysis will be shifted to server based dashboard.
+- Slack notification of weekly report to user will be sent through server.
+- Leaderboard based on user's usage of files.
+- Adding support for other editors such as visual code.
+- Possible realtime analysis of the user's file.
