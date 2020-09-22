@@ -42,7 +42,15 @@
 
 Please take a look at our CONTRIBUTING.md where we provide instructions on contributing to the repo and taking the plugin development further.
 
-### What things are planned for Phase 2?
+## What things have been done for Phase 1 ?
+- Created the design and architecture of the project
+- Implemented the logic to collect the data in background
+- Implemented the code to generate the graphs to analyse the time spent
+- Integrated the code with sublime text editor
+- Unit tests
+- Build and Packaging of the plugin
+
+## What things are planned for Phase 2?
 
 - The data generated will be sent to server.
 - Local data analysis will be shifted to server based dashboard.
