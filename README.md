@@ -41,8 +41,29 @@
 
 ## Setup (For contributors)
 
+<<<<<<< Updated upstream
+=======
+* Project Requirement
+### How to setup this plugin?
+>>>>>>> Stashed changes
 
 
 ## How to Contribute? (For contributing developers)
 
+<<<<<<< Updated upstream
 Please take a look at our CONTRIBUTING.md where we provide instructions on contributing to the repo and taking the plugin development further.
+=======
+- Once the repository is cloned in `SublimePackagesFolder`, Open sublime text.
+- Open a project/file the you wish to work on.
+- Go to `View` -> `Show Console`.
+- Now at every action (open, save, switching file), you should be able to see corresponding log entries in console.
+
+### What things are planned for Phase 2?
+
+- The data generated will be sent to server.
+- Local data analysis will be shifted to server based dashboard.
+- Slack notification of weekly report to user will be sent through server.
+- Leaderboard based on user's usage of files.
+- Adding support for other editors such as visual code.
+- Possible realtime analysis of the user's file.
+>>>>>>> Stashed changes
