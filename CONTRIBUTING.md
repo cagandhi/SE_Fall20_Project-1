@@ -17,6 +17,7 @@ The following is a set of guidelines for contributing to CSC 510 Project 1 and i
   * [Pull Requests](#pull-requests)
 
 [Styleguides](#styleguides)
+  * [Coding Style](#coding-style)
   * [Git Commit Messages](#git-commit-messages)
 
 ## Code of Conduct
@@ -76,6 +77,11 @@ Please follow these steps to have your contribution considered by the maintainer
 While the prerequisites above must be satisfied prior to having your pull request reviewed, the reviewer(s) may ask you to complete additional design work, tests, or other changes before your pull request can be ultimately accepted.
 
 ## Styleguides
+
+### Coding Style
+
+* Use tab based indentation
+* Make sure variables representing constants such as `DATA_FOLDER` and `FILE_PATH` should be capitalized.
 
 ### Git Commit Messages
 
