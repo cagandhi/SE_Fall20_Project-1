@@ -4,6 +4,7 @@ import platform
 import os
 from datetime import datetime as dt
 import sys
+import subprocess
 
 from .periodicLogSaver import PeriodicLogSaver
 
@@ -114,7 +115,11 @@ class CustomEventListener(sublime_plugin.EventListener):
 			exc_type, exc_obj, exc_tb = sys.exc_info()
 			print("codeTime:CustomEventListener():on_close() {error} on line number: {lno}".format(error=str(e), lno=str(exc_tb.tb_lineno)))  # noqa: E501
 
-
+        print("Showing Graphs")
+        #print(os.popen().read())
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        process = subprocess.Popen("python '"+dir_path+"/output.py'", shell=True, stdout=subprocess.PIPE)
+    
 # view.run_command('dashboard')
 class DashboardCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
