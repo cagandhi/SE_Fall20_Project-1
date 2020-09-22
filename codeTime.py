@@ -119,7 +119,6 @@ class CustomEventListener(sublime_plugin.EventListener):
                         '\n')  # noqa: E501
 
         print("Showing Graphs")
-        #print(os.popen().read())
         dir_path = os.path.dirname(os.path.realpath(__file__))
         process = subprocess.Popen("python '"+dir_path+"/output.py'", shell=True, stdout=subprocess.PIPE)
     
