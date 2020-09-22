@@ -1,6 +1,6 @@
 ## Project Requirements: .
 
-1.The plugin should record the following data.
+1. The plugin should record the following data.
 *  Time spent on a specific file
 *  Time spent on a specific programming language.
 *  Time spent on specific project. 
