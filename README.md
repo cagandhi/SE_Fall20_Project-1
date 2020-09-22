@@ -30,14 +30,14 @@
 7. You are all set. The plugin is now active and is running in the background.
 
 
-## Usage (For non-contributors)
+## Usage
 
 1. Open Sublime Text.
 2. Open a file that you wish to work on.
 3. In the file pane, right click and select the option `View CodeTime Dashboard`.
 
 
-## Setup
+## Setup (For contributors)
 
 1. Perform the steps in the [Installation](https://github.com/oaaky/SE_Fall20_Project-1#installation-for-non-contributors) section described above.
 2. Install Package Control by pressing `ctrl+shift+p (Win/Linux)` or `cmd+shift+p (Mac)`.
@@ -57,14 +57,14 @@
 
 ```
 
-## How to Run Tests? 
+## How to Run Tests? (For contributors)
 
 1. For local execution of the tests, make sure that the Sublime package `UnitTesting` is installed. 
 2. Navigate to a test file in `tests` folder that you want to run your tests for. 
 3. Open Package Control and type in `UnitTesting: Test Current Package`. 
 4. The tests will run and a small output panel pops up showing that the tests are running.
 
-For more information and guide on how to run tests, take a look at this [README.md](https://github.com/randy3k/UnitTesting/blob/master/README.md) file. For examples on how to write tests for sublime plugin, take a look at this [repo](https://github.com/randy3k/UnitTesting-example).
+For more information and guide on how to run tests, take a look at this [README.md by randy3k](https://github.com/randy3k/UnitTesting/blob/master/README.md). For examples on how to write tests for sublime plugin, take a look at this [Repo by randy3k](https://github.com/randy3k/UnitTesting-example).
 
 ## How to Contribute?
 
