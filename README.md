@@ -39,6 +39,8 @@
 
 ## Setup (For contributors)
 
+> <strong>Note:</strong> Please install and use Sublime Text 3 only for development.
+
 1. Perform the steps in the [Installation](https://github.com/oaaky/SE_Fall20_Project-1#installation-for-non-contributors) section described above.
 2. Install Package Control by pressing `ctrl+shift+p (Win/Linux)` or `cmd+shift+p (Mac)`.
 3. Run `python setup.py install` to install all the dependencies.

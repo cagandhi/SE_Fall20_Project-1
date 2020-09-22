@@ -9,8 +9,8 @@ import sys
 class PeriodicLogSaver(threading.Thread):
 
 	def __init__(self, group=None, target=None, name=None,
-				 args=(), kwargs=None, verbose=None):
-		super(PeriodicLogSaver,self).__init__(group=group, target=target,name=name)
+					args=(), kwargs=None, verbose=None):  # noqa: E128
+		super(PeriodicLogSaver, self).__init__(group=group, target=target, name=name)
 		self.args = args
 		self.kwargs = kwargs
 		return
@@ -22,13 +22,13 @@ class PeriodicLogSaver(threading.Thread):
 				curr_date = dt.now().strftime('%Y-%m-%d')
 
 				if curr_file is not None:
-					inMemoryLogDeepCopy=copy.deepcopy(self.kwargs['inMemoryLog'])
-					inMemoryLog=self.kwargs['inMemoryLog']
+					inMemoryLogDeepCopy = copy.deepcopy(self.kwargs['inMemoryLog'])
+					inMemoryLog = self.kwargs['inMemoryLog']
 					inMemoryLog.clear()
 
-					if curr_date in inMemoryLogDeepCopy and curr_file in inMemoryLogDeepCopy[curr_date]:
-						end_time=time.time()
-						inMemoryLogDeepCopy[curr_date][curr_file][-1][1]=end_time
+					if curr_date in inMemoryLogDeepCopy and curr_file in inMemoryLogDeepCopy[curr_date]:  # noqa: E501
+						end_time = time.time()
+						inMemoryLogDeepCopy[curr_date][curr_file][-1][1] = end_time
 
 						if curr_date not in inMemoryLog:
 							inMemoryLog[curr_date] = {}
@@ -42,7 +42,7 @@ class PeriodicLogSaver(threading.Thread):
 				time.sleep(self.kwargs['timeout'])
 			except Exception as e:
 				exc_type, exc_obj, exc_tb = sys.exc_info()
-				print("periodicLogSaver:PeriodicLogSaver:run(): {error} on line number: {lno}".format( error = str(e), lno = str(exc_tb.tb_lineno)))
+				print("periodicLogSaver:PeriodicLogSaver:run(): {error} on line number: {lno}".format(error=str(e), lno=str(exc_tb.tb_lineno)))  # noqa: E501
 
 	def write_log_file(self, file_times_dict):
 		try:
@@ -58,4 +58,4 @@ class PeriodicLogSaver(threading.Thread):
 
 		except Exception as e:
 			exc_type, exc_obj, exc_tb = sys.exc_info()
-			print("periodicLogSaver:PeriodicLogSaver():write_log_file(): {error} on line number: {lno}".format( error = str(e), lno = str(exc_tb.tb_lineno)))
+			print("periodicLogSaver:PeriodicLogSaver():write_log_file(): {error} on line number: {lno}".format(error=str(e), lno=str(exc_tb.tb_lineno)))  # noqa: E501

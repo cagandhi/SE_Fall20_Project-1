@@ -109,27 +109,20 @@ class CustomEventListener(sublime_plugin.EventListener):
 
 				with open(LOG_FILE_PATH, 'a') as f:
 					for _time in file_times_dict[curr_date][file_name]:
-						f.write(curr_date + ',' + file_name + ',' + str(time[0]) + ',' + str(_time[1]) + '\n')  # noqa: E501
+						f.write(curr_date + ',' + file_name + ',' + str(_time[0]) + ',' + str(_time[1]) + '\n')  # noqa: E501
 				file_times_dict[curr_date].pop(file_name, None)
 		except Exception as e:
 			exc_type, exc_obj, exc_tb = sys.exc_info()
 			print("codeTime:CustomEventListener():on_close() {error} on line number: {lno}".format(error=str(e), lno=str(exc_tb.tb_lineno)))  # noqa: E501
 
-        print("Showing Graphs")
-        dir_path = os.path.dirname(os.path.realpath(__file__))
-        process = subprocess.Popen("python '"+dir_path+"/output.py'", shell=True, stdout=subprocess.PIPE)
-    
+
 # view.run_command('dashboard')
 class DashboardCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		try:
-			for key, val in file_times_dict.items():
-				curr_date = key
-				file_dict = val
-
-				for file_name, times_list in file_dict.items():
-					for time_start_end in times_list:
-						print(curr_date + ' -||- ' + file_name + ' -||- ' + str(time_start_end[0]) + ' -||- ' + str(time_start_end[1]) + '\n')  # noqa: E501
+			print("Showing Graphs")
+			dir_path = os.path.dirname(os.path.realpath(__file__))
+			process = subprocess.Popen("python3 '" + dir_path + "/output.py'", shell=True, stdout=subprocess.PIPE)  # noqa: E501, F841
 		except Exception as e:
 			exc_type, exc_obj, exc_tb = sys.exc_info()
 			print("codeTime:DashboardCommand():run() {error} on line number: {lno}".format(error=str(e), lno=str(exc_tb.tb_lineno)))  # noqa: E501
