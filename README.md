@@ -10,16 +10,16 @@
 
 ## About CodeTime
 
-- CodeTime is a plugin for Sublime Text editor which will help developers to track the amount of time spent on multiple files, programming languages and projects. The user will be able to perform the analysis of the time spent to improve the productivity by analysing the most frequently used programming language, most productive time of the day, files in project which took maximum time for development and projects which took maximum time for completion. 
+- CodeTime is a plugin for Sublime Text editor which will help developers to track the amount of time spent on multiple files, programming languages and projects. The user will be able to perform the analysis of the time spent to improve the productivity by analysing the most frequently used programming language, most productive time of the day, files in project which took maximum time for development and projects which took maximum time for completion.
 
 - The developer can add the project deadlines to the plugin and the plugin can help developers stick to their goal by predicting the finish time of the project based on the data gathered from the user. Multiple developers can compete with each other through a leaderboard where a leaderboard will display the ranking of most productive developer and admin/manager can easily monitor the productivity of each and every developer with the help of a common interface.
 
 [Project Requirement](https://github.com/oaaky/SE_Fall20_Project-1/blob/master/project_requiremnt.md) | [Architecture Diagram](https://github.com/oaaky/SE_Fall20_Project-1/blob/master/architecure.png) | [UI MockUps](https://github.com/oaaky/SE_Fall20_Project-1/blob/master/Capture.PNG)
 
-[![CodeTime Promo Video](https://img.youtube.com/vi/CL5W7C9Jw_c/0.jpg)](https://www.youtube.com/watch?v=CL5W7C9Jw_c)
+[![CodeTime Promo Video](https://img.youtube.com/vi/CL5W7C9Jw_c/0.jpg)](http://tiny.cc/codeTimePromo)
 
 
-## Installation (For non-contributors)
+## Installation
 
 1. Open Sublime Text.
 2. Go to Preferences -> Browse packages.
@@ -35,11 +35,8 @@
 2. Open a file that you wish to work on.
 3. In the file pane, right click and select the option `View CodeTime Dashboard`.
 
-<!-- 3. Go to `View` -> `Show Console`. -->
-<!-- 4. Now at every action (open, save, switching file), you should be able to see corresponding log entries in console. -->
 
-
-## Setup (For contributors)
+## Setup
 
 1. Perform the steps in the [Installation](https://github.com/oaaky/SE_Fall20_Project-1#installation-for-non-contributors) section described above.
 2. Install Package Control by pressing `ctrl+shift+p (Win/Linux)` or `cmd+shift+p (Mac)`.
@@ -59,13 +56,30 @@
 
 ```
 
-## How to Run Tests?
+## How to Run Tests? 
 
 1. For local execution of the tests, make sure that the Sublime package `UnitTesting` is installed. 
 2. Navigate to a test file in `tests` folder that you want to run your tests for. 
 3. Open Package Control and type in `UnitTesting: Test Current Package`. 
 4. The tests will run and a small output panel pops up showing that the tests are running.
 
-## How to Contribute? (For contributing developers)
+## How to Contribute?
 
 Please take a look at our CONTRIBUTING.md where we provide instructions on contributing to the repo and taking the plugin development further.
+
+## What things have been done for Phase 1 ?
+- Created the design and architecture of the project
+- Implemented the logic to collect the data in background
+- Implemented the code to generate the graphs to analyse the time spent
+- Integrated the code with sublime text editor
+- Unit tests
+- Build and Packaging of the plugin
+
+## What things are planned for Phase 2?
+
+- The data generated will be sent to server.
+- Local data analysis will be shifted to server based dashboard.
+- Slack notification of weekly report to user will be sent through server.
+- Leaderboard based on user's usage of files.
+- Adding support for other editors such as visual code.
+- Possible realtime analysis of the user's file.
