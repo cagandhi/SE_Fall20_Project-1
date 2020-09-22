@@ -26,7 +26,8 @@
 3. A new window containing Sublime packages directory will open up. Let's call this folder `SublimePackagesFolder`.
 4. Open your terminal and navigate to `SublimePackagesFolder`.
 5. Clone this repository inside `SublimePackagesFolder` (This makes sure that Sublime recognizes our plugin package to execute).
-6. You are all set. The plugin is now active and is running in the background.
+6. Copy the [Context.sublime-menu](code/SublimePlugin/Config/Context.sublime-menu) file to your User Packages directory. To go to User Packages directory, navigate to `SublimePackagesFolder/User` folder.
+7. You are all set. The plugin is now active and is running in the background.
 
 
 ## Usage (For non-contributors)
@@ -62,6 +63,8 @@
 2. Navigate to a test file in `tests` folder that you want to run your tests for. 
 3. Open Package Control and type in `UnitTesting: Test Current Package`. 
 4. The tests will run and a small output panel pops up showing that the tests are running.
+
+For more information and guide on how to run tests, take a look at this [README.md](https://github.com/randy3k/UnitTesting/blob/master/README.md) file. For examples on how to write tests for sublime plugin, take a look at this [repo](https://github.com/randy3k/UnitTesting-example).
 
 ## How to Contribute?
 
