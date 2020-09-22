@@ -1,9 +1,11 @@
 # CodeTime - A time tracking plugin for text editors [G23 Project 1]
 [![GitHub license](https://img.shields.io/github/license/oaaky/SE_Fall20_Project-1)](https://github.com/oaaky/SE_Fall20_Project-1/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/oaaky/SE_Fall20_Project-1.svg?branch=master)](https://travis-ci.org/oaaky/SE_Fall20_Project-1)
 ![GitHub](https://img.shields.io/badge/language-python-blue.svg)
 ![GitHub issues](https://img.shields.io/github/issues/oaaky/SE_Fall20_Project-1)
 ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/oaaky/SE_Fall20_Project-1)
 ![YouTube Video Views](https://img.shields.io/youtube/views/CL5W7C9Jw_c?style=social)
+
 
 ### Promo Video
 [![CodeTime Promo Video](https://img.youtube.com/vi/CL5W7C9Jw_c/0.jpg)](https://www.youtube.com/watch?v=CL5W7C9Jw_c)
