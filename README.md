@@ -13,7 +13,7 @@
 
 ### What is the product?
 
-In a nutshell, this is an extension for text editors which would let developers analyze the time it takes for them to write code in various languages broken down by projects and files they are working on. The primary purpose of such an extension is to allow developers to see the tasks that took more time for them to build and plan accordingly in the future.
+In this project we are developing a plugin for sublime text editor which will help developers to track the amount of time spent on multiple files, programming languages and projects. The user can perform the analysis of the time spent to improve the productivity by analysing the most frequently used programming language, most productive time of the day, files in project which took maximum time for development and projects which took maximum time for completion. The User can add the project deadlines to the plugin and plugin can help developers to stick to the goal  by predicting the finish time of the project based on the data gathered from the user. Multiple developers can compete with each other through a leader board where a leader board will display the ranking of most productive developer and admin/manager can easily monitor the productivity of each and every developer with the help of a common interface.
 
 ### How to setup this plugin?
 
