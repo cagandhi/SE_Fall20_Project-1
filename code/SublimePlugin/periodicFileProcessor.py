@@ -27,13 +27,7 @@ class PeriodicFileProcessor(threading.Thread):
     def run(self):
         while True:
             try:
-                f = open(
-                    "/Users/prithvirajchaudhuri/Desktop/CSC510/"
-                    + "Project/CodeTime/demofile2.txt",
-                    "a",
-                )
-                f.write("Now the file has more content!")
-                f.close()
+                self.send_data_to_server()
                 time.sleep(self.kwargs["timeout"])
             except Exception as e:
                 exc_type, exc_obj, exc_tb = sys.exc_info()
@@ -44,3 +38,12 @@ class PeriodicFileProcessor(threading.Thread):
                         error=str(e), lno=line_no
                     )
                 )
+
+    def send_data_to_server(self):
+        f = open(
+            "/Users/prithvirajchaudhuri/Desktop/CSC510/"
+            + "Project/CodeTime/demofile2.txt",
+            "a",
+        )
+        f.write("Now the file has more content!")
+        f.close()
