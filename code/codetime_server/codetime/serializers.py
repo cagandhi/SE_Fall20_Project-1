@@ -11,3 +11,16 @@ class UserSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         pass
+
+
+class TimeLogSerializer(serializers.Serializer):
+    
+    file_name = serializers.CharField(max_length=1000, required=True)
+    file_extension = serializers.CharField(max_length=20, required=True)
+    detected_language = serializers.CharField(max_length=50, required=True)
+    log_date = serializers.DateField(required=True)
+    log_timestamp = serializers.FloatField(required=True)
+    api_token = serializers.CharField(max_length=32)
+
+    def create(self, validated_data):
+        pass
