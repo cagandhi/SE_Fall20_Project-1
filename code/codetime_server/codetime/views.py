@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from rest_framework import generics
 
-# Create your views here.
+
+class UserView(generics.ListCreateAPIView, generics.RetrieveUpdateDestroyAPIView):
+    
+    def post(self, request, *args, **kwargs):
+    
+        pass

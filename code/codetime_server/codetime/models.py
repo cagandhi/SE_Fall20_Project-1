@@ -6,7 +6,32 @@ import uuid
 
 
 class UserManager(models.Manager):
-    pass
+    
+    @staticmethod
+    def create_user(user):
+        
+        user_instance = User(**user)
+        
+        if not user_instance.save():
+            return 0
+        return 1
+    
+    def update_user(self, user, api_token):
+        
+        user_instance = self.filter(api_token=api_token)
+        
+        if user_instance:
+            user_instance.update(**user)
+            return 0
+        return 1
+    
+    def login(self, username, password):
+        
+        user_info = self.filter(username=username, password=password).first()
+        
+        if user_info:
+            return user_info["api_token"]
+        return -1
 
 
 class User(models.Model):
