@@ -1,12 +1,13 @@
 from rest_framework import generics
+from .request_handlers import *
 from rest_framework.response import Response
-from .request_handlers import handle_log_file_post, handle_user_post
 
 
 class UserView(generics.ListCreateAPIView, generics.RetrieveUpdateDestroyAPIView):
     
     def post(self, request, *args, **kwargs):
-        handle_user_post(request)
+        response = handle_user_post(request)
+        return Response(data=response)
 
 class TimeLogView(generics.ListCreateAPIView, generics.RetrieveUpdateDestroyAPIView):
     

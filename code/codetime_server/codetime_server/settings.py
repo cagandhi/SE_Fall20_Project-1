@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'codetime',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -78,11 +79,11 @@ WSGI_APPLICATION = 'codetime_server.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ["MYSQL_DATABASE"],
-        'USER': os.environ["MYSQL_USER"],
-        'PASSWORD': os.environ["MYSQL_PASSWORD"],
-        'HOST': os.environ["MYSQL_HOST"],   
-        'PORT': int(os.environ["MYSQL_CONNECTION_PORT"]),
+        'NAME': os.environ["MYSQL_CODE_TIME_DB_NAME"],
+        'USER': os.environ["MYSQL_CODE_TIME_USER"],
+        'PASSWORD': os.environ["MYSQL_CODE_TIME_PASSWORD"],
+        'HOST': os.environ["MYSQL_CODE_TIME_HOST"],
+        'PORT': int(os.environ["MYSQL_CODE_TIME_CONNECTION_PORT"]),
     }
 }
 
