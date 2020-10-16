@@ -1,7 +1,9 @@
 from django.db import models
 from django.utils.crypto import get_random_string
+from django.utils.timezone import now
 from django.core import serializers
 import uuid
+import json
 from django.db.utils import IntegrityError
 
 # Create your models here.
@@ -40,6 +42,7 @@ class UserManager(models.Manager):
                 return 0
             return 1
         except IntegrityError as e:
+            print(e)
             return 2
     
     def update_user(self, user, api_token):
@@ -79,36 +82,34 @@ class TimeLogManager(models.Manager):
                         log_timestamp):
 
         try:
-            print("Here")
             user = User.objects.filter(api_token=api_token).first()
-            self.create(log_user_id=user, file_name=file_name,
+            file_log = self.filter(log_user_id=user, file_name=file_name).first()
+            if file_log is not None:
+                log_timestamp = file_log.log_timestamp + log_timestamp
+                self.filter(log_user_id=user, file_name=file_name).update(log_timestamp=log_timestamp,
+                        modified_at=now())
+            else:
+                self.create(log_user_id=user, file_name=file_name,
                                 file_extension=file_extension, detected_language=detected_language,
                                 log_date=log_date, log_timestamp=log_timestamp) 
             
-            return 1
+            return api_token
         except Exception as e:
             print("error in creating logs for user " , e)
-            return 0
+            return e
 
     def get_time_logs(self, api_token):
 
         try:
             user = User.objects.filter(api_token=api_token).first()
-            logs = self.filter(log_user_id=user["log_user_id"]).all()
-            return json.loads(serializers.serialize('json', [log for log in logs]))
+            if user is not None:
+                logs = self.filter(log_user_id=user).all()
+                return json.loads(serializers.serialize('json', [log for log in logs]))
+            else:
+                return "User doesnot exist"
         except Exception as e:
             print("error in getting logs for user " , e)
-            return []
-
-    def get_time_logs_for_language(self, api_token, language):
-    
-        try:
-            user = User.objects.filter(api_token=api_token).first()
-            logs = self.filter(log_user_id=user["log_user_id"], detected_language=language).all()
-            return json.loads(serializers.serialize('json', [log for log in logs]))
-        except Exception as e:
-            print("error in getting logs for user " , e)
-            return []
+            return e
 
 
 class TimeLog(models.Model):

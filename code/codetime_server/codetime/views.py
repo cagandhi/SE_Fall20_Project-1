@@ -9,14 +9,13 @@ class UserView(generics.ListCreateAPIView, generics.RetrieveUpdateDestroyAPIView
         response = handle_user_post(request)
         return Response(data=response)
 
-class TimeLogView(generics.ListCreateAPIView, generics.RetrieveUpdateDestroyAPIView):
+
+class TimeLogView(generics.ListAPIView, generics.CreateAPIView):
     
     def post(self, request, *args, **kwargs):
-        status = handle_log_file_post(request)
-        if status == 0:
-            return Response(data="Error Occured", status=400)
-        else:
-            return Response(data="Successful Request", status=200)
+        response = handle_log_file_post(request)
+        return Response(data=response, status=response.get('status'))
 
     def get(self, request, *args, **kwargs):
-        pass
+        response = handle_get_file_logs(request)
+        return Response(data=response, status=response.get('status', 200))
