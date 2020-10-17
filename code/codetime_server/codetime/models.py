@@ -35,6 +35,8 @@ class UserManager(models.Manager):
     
     @staticmethod
     def create_user(user):
+        
+        user["api_token"] = str(uuid.uuid4())+get_random_string(length=16)
 
         user_instance = User(**user)
         try:
@@ -71,11 +73,24 @@ class User(models.Model):
     log_user_id = models.AutoField(primary_key=True)
     username = models.CharField(unique=True, blank=False, null=False, max_length=100)
     password = models.CharField(blank=False, null=False, max_length=100)
-    api_token = models.CharField(default=str(uuid.uuid4())+get_random_string(length=16), max_length=200)
+    api_token = models.CharField(max_length=200)
     objects = UserManager()
 
 
 class TimeLogManager(models.Manager):
+    
+    @staticmethod
+    def create_log(time_log):
+        
+        time_log_instance = TimeLog(**time_log)
+        
+        try:
+            
+            if not time_log_instance.save():
+                return 0
+            return 1
+        except:
+            return 1
 
     def create_time_log(self, api_token, file_name, file_extension, 
                         detected_language, log_date, 
@@ -101,14 +116,10 @@ class TimeLogManager(models.Manager):
     def get_time_logs(self, api_token):
 
         try:
-            user = User.objects.filter(api_token=api_token).first()
-            if user is not None:
-                logs = self.filter(log_user_id=user).all()
-                return json.loads(serializers.serialize('json', [log for log in logs]))
-            else:
-                return "User doesnot exist"
+            logs = self.filter(api_token=api_token).all()
+            return json.loads(serializers.serialize('json', [log for log in logs]))
         except Exception as e:
-            print("error in getting logs for user " , e)
+            print("error in getting logs for user ", e)
             return e
 
 
@@ -116,10 +127,9 @@ class TimeLog(models.Model):
 
     class Meta:
         db_table = "log_file_time"
-        unique_together = (('log_user_id', 'file_name'),)
 
     log_file_time_id = models.AutoField(primary_key=True)
-    log_user_id = models.ForeignKey(to=User, related_name="user_id", on_delete=models.CASCADE)
+    api_token = models.CharField(max_length=200, null=False, blank=False)
     file_name = models.CharField(max_length=1000, null=False, blank=False)
     file_extension = models.CharField(max_length=20, null=True, blank=True)
     detected_language = models.CharField(max_length=50, null=True, blank=True)

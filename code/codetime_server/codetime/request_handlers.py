@@ -1,5 +1,6 @@
 from .models import User, TimeLog
 from .serializers import UserSerializer, TimeLogSerializer
+from django.core.serializers import serialize
 
 
 def get_missing_param_response(data=None):
@@ -107,20 +108,30 @@ def handle_user_post(request):
 
 
 def handle_log_file_post(request):
-
-    serializer = TimeLogSerializer(data=request.data)
-    if serializer.is_valid():
-        data = serializer.data
-        response = TimeLog.objects.create_time_log(data["api_token"],
-                                                 data["file_name"], data["file_extension"], 
-                                                 data["detected_language"], data["log_date"], 
-                                                 data["log_timestamp"])
-        if response==data["api_token"]:
-            return get_valid_output_response(response)
+    
+    return_data = dict()
+    return_data["created"] = []
+    return_data["failed"] = []
+    
+    for data_point in request.data:
+        
+        serializer = TimeLogSerializer(data=data_point)
+        
+        if serializer.is_valid():
+            creation_status = TimeLog.objects.create_log(serializer.data)
+            if not creation_status:
+                return_data["created"].append(serializer.data)
+            else:
+                return_data["failed"].append(data_point)
         else:
-            return get_something_went_wrong_response(response)
-    else:
-        return get_serializer_error_response(serializer.errors)
+            return_data["failed"].append(data_point)
+            
+    return {
+                "status": 0,
+                "message": "",
+                "data": return_data
+            }
+
 
 def handle_get_file_logs(request):
 

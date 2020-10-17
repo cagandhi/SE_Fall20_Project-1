@@ -20,7 +20,10 @@ class TimeLogSerializer(serializers.Serializer):
     detected_language = serializers.CharField(max_length=50, required=True)
     log_date = serializers.DateField(required=True)
     log_timestamp = serializers.FloatField(required=True)
-    api_token = serializers.CharField(max_length=32)
+    api_token = serializers.CharField(max_length=200)
 
     def create(self, validated_data):
+        pass
+    
+    def update(self, instance, validated_data):
         pass

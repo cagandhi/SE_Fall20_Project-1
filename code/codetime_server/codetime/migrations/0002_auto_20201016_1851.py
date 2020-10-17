@@ -13,10 +13,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='user',
             name='api_token',
-            field=models.CharField(default='3bb98045-9d2e-40e2-b356-f4cfc198202eULdcagvhY5vC1m6k', max_length=200),
-        ),
-        migrations.AlterUniqueTogether(
-            name='timelog',
-            unique_together={('log_user_id', 'file_name')},
+            field=models.CharField(max_length=200),
         ),
     ]
