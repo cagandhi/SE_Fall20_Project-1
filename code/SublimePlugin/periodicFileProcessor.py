@@ -1,10 +1,8 @@
-import copy
 import sys
 import threading
 import time
+import requests
 from datetime import datetime as dt
-
-import sublime
 
 
 class PeriodicFileProcessor(threading.Thread):
@@ -45,5 +43,29 @@ class PeriodicFileProcessor(threading.Thread):
             + "Project/CodeTime/demofile2.txt",
             "a",
         )
-        f.write("Now the file has more content!")
+        api_token = "74815790-d740-4344-b9c3-a505514edf88VHSda13oJOr5Iba4"
+        obj = [
+            {
+                "file_name": "test.java",
+                "file_extension": "java",
+                "detected_language": "java",
+                "log_date": "2020-10-01",
+                "log_timestamp": "160000290",
+                "api_token": api_token,
+            },
+            {
+                "file_name": "test.py",
+                "file_extension": "py",
+                "detected_language": "python",
+                "log_date": "2020-10-01",
+                "log_timestamp": "160000290",
+                "api_token": api_token,
+            },
+        ]
+
+        response = requests.post(
+            "http://localhost:8000/codetime/timelog/", json=obj
+        )
+
+        f.write(response.json())
         f.close()
