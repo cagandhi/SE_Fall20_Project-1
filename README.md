@@ -1,4 +1,5 @@
-# CodeTime - A time tracking plugin for text editors [G23 Project 1]
+# CodeTime - A time tracking plugin for text editors
+
 [![DOI](https://zenodo.org/badge/295515546.svg)](https://zenodo.org/badge/latestdoi/295515546)
 [![Build Status](https://travis-ci.org/oaaky/SE_Fall20_Project-1.svg?branch=master)](https://travis-ci.org/oaaky/SE_Fall20_Project-1)
 [![GitHub license](https://img.shields.io/github/license/oaaky/SE_Fall20_Project-1)](https://github.com/oaaky/SE_Fall20_Project-1/blob/master/LICENSE)
@@ -11,7 +12,7 @@
 
 - The developer can add the project deadlines to the plugin and the plugin can help developers stick to their goal by predicting the finish time of the project based on the data gathered from the user. Multiple developers can compete with each other through a leaderboard where a leaderboard will display the ranking of most productive developer and admin/manager can easily monitor the productivity of each and every developer with the help of a common interface.
 
-[Project Requirement](docs/Project_Requirements.md) | [Architecture Diagram](docs/architecure.png) | [UI MockUps](docs/Capture.PNG) | [Current Working Dashboard](docs/CodeTimeDashboard.png) | [Installation and Usage Guide](docs/guide.md)
+[Project Requirement](docs/Project_Requirements.md) | [Architecture](docs/architecure.png) | [UI MockUps](docs/Capture.PNG) | [Working Dashboard](docs/CodeTimeDashboard.png) | [Installation and Usage Guide](docs/guide.md)
 
 [![CodeTime](https://img.youtube.com/vi/lnOyBFZFu7g/0.jpg)](https://youtu.be/lnOyBFZFu7g)
 
