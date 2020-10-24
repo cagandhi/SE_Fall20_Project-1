@@ -111,15 +111,6 @@ class PeriodicLogSaver(threading.Thread):
                     .decode()
                 )
 
-                f = open(
-                    "/Users/prithvirajchaudhuri/Desktop/CSC510/"
-                    + "Project/CodeTime/demofile2.txt",
-                    "a",
-                )
-                f.write(json.dumps(response))
-                f.write("\n")
-                f.close()
-
         except Exception as e:
             exc_type, exc_obj, exc_tb = sys.exc_info()
             print(
