@@ -88,8 +88,8 @@ class PeriodicLogSaver(threading.Thread):
                             )  # noqa: E501
                             row = {}
                             row["file_name"] = file_name.split("/")[-1]
-                            row["file_extension"] = file_name.split(".")[1]
-                            row["detected_language"] = "python"
+                            row["file_extension"] = file_name.split(".")[-1]
+                            row["detected_language"] = file_name.split(".")[-1]
                             row["log_date"] = curr_date
                             row["log_timestamp"] = str(time_start_end[0])
                             row["api_token"] = api_token
