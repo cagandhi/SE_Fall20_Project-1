@@ -2,4 +2,3 @@ pytest
 plotly
 flake8
 black
-requests

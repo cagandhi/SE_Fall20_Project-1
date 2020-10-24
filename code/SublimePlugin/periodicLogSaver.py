@@ -2,6 +2,8 @@ import threading
 import time
 import copy
 import sublime
+import json
+import urllib.request
 from datetime import datetime as dt
 import sys
 
@@ -65,6 +67,8 @@ class PeriodicLogSaver(threading.Thread):
     def write_log_file(self, file_times_dict):
         try:
 
+            obj = []
+            api_token = "74815790-d740-4344-b9c3-a505514edf88VHSda13oJOr5Iba4"
             with open(self.kwargs["LOG_FILE_PATH"], "a") as f:
                 for key, val in file_times_dict.items():
                     curr_date = key
@@ -82,6 +86,39 @@ class PeriodicLogSaver(threading.Thread):
                                 + str(time_start_end[1])
                                 + "\n"
                             )  # noqa: E501
+                            row = {}
+                            row["file_name"] = file_name.split("/")[-1]
+                            row["file_extension"] = file_name.split(".")[1]
+                            row["detected_language"] = "python"
+                            row["log_date"] = curr_date
+                            row["log_timestamp"] = str(time_start_end[0])
+                            row["api_token"] = api_token
+                            obj.append(row)
+                f.close()
+
+                req = urllib.request.Request(
+                    "http://localhost:8000/codetime/timelog/"
+                )
+                req.add_header(
+                    "Content-Type", "application/json; charset=utf-8"
+                )
+                jsondata = json.dumps(obj)
+                jsondataasbytes = jsondata.encode("utf-8")
+                req.add_header("Content-Length", len(jsondataasbytes))
+                response = (
+                    urllib.request.urlopen(req, jsondataasbytes)
+                    .read()
+                    .decode()
+                )
+
+                f = open(
+                    "/Users/prithvirajchaudhuri/Desktop/CSC510/"
+                    + "Project/CodeTime/demofile2.txt",
+                    "a",
+                )
+                f.write(json.dumps(response))
+                f.write("\n")
+                f.close()
 
         except Exception as e:
             exc_type, exc_obj, exc_tb = sys.exc_info()

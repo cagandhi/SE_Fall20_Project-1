@@ -7,7 +7,6 @@ import sys
 import subprocess
 
 from .periodicLogSaver import PeriodicLogSaver
-from .periodicFileProcessor import PeriodicFileProcessor
 
 # create data folder based on OS
 if platform.system() == "Windows":
@@ -187,14 +186,6 @@ def plugin_loaded():
                 }
             )  # noqa: E501
             periodcLogSaver.start()
-            periodicFileProcessor = PeriodicFileProcessor(
-                kwargs={
-                    "inMemoryLog": file_times_dict,
-                    "timeout": periodic_log_save_timeout,
-                    "LOG_FILE_PATH": LOG_FILE_PATH,
-                }
-            )
-            periodicFileProcessor.start()
     except Exception as e:
         exc_type, exc_obj, exc_tb = sys.exc_info()
         print(
