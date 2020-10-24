@@ -11,11 +11,11 @@ install:
   - pip install -r requirements.txt
   - python setup.py install
   - pip install flake8==3.5
-  - sh sbin/travis.sh bootstrap
-  - sh sbin/travis.sh install_color_scheme_unit
-  - if ["$PCINSTALL" == true]; then sh sbin/travis.sh install_package_control; fi
+  - /bin/sh sbin/travis.sh bootstrap
+  - /bin/sh sbin/travis.sh install_color_scheme_unit
+  - if ["$PCINSTALL" == true]; then /bin/sh sbin/travis.sh install_package_control; fi
 # command to run tests
 script:
   - flake8 --statistics
-  - sh sbin/travis.sh run_tests --coverage
-  - python -m pytes
+  - /bin/sh sbin/travis.sh run_tests --coverage
+  - python -m pytest
