@@ -22,6 +22,7 @@ def show_graphs():
         DATA_FOLDER_PATH = os.path.join(os.path.expanduser("~"), ".codeTime")
     LOG_FILE_PATH = os.path.join(DATA_FOLDER_PATH, ".sublime_logs")
 
+
     sample_data = open(LOG_FILE_PATH, "r").read()
     logs = sample_data.split("\n")
 
@@ -59,6 +60,7 @@ def show_graphs():
         ],
     )
 
+
     # ###############################- Pie Chart-
     durations = defaultdict(int)
     for file_path in logs_dict.keys():
@@ -69,6 +71,7 @@ def show_graphs():
     trace_timespan = go.Pie(
         labels=list(durations.keys()), values=list(durations.values())
     )  # noqa: E501
+
     fig.append_trace(trace_timespan, 2, 1)
     fig.append_trace(trace_timespan, 2, 2)
     # ##############################
@@ -94,6 +97,7 @@ def show_graphs():
             name=file_type,
             fill="tozeroy",
         )  # noqa: E501
+
         # data.append(trace_timespan)
         fig.append_trace(trace_timespan, 1, 1)
     # fig = go.Figure(data=data)
@@ -116,6 +120,7 @@ def show_graphs():
             cells=dict(values=[filenames, durations]),
         )
     ]  # noqa: E128
+
     # fig = go.Figure(data=data)
     # plot(fig,filename="table.html")
 

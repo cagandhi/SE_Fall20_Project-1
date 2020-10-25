@@ -18,8 +18,8 @@ from django.db.utils import IntegrityError
 class UserManager(models.Manager):
     '''
 
-    APIs for the User 
-    Performs User actions (CRUD operations) 
+    APIs for the User
+    Performs User actions (CRUD operations)
     for signup, login and updating user.
 
     '''
@@ -63,7 +63,7 @@ class UserManager(models.Manager):
     def create_user(user):
         """
         Create a new user.
-        
+
         :param dict user: validated user details from post request
         :return: response status (0 for failure, 1 for success and 2 for DB error)
         :rtype: int
@@ -82,7 +82,7 @@ class UserManager(models.Manager):
     def update_user(self, user, api_token):
         """
         Update user information.
-        
+
         :param dict user: validated user details from post request
         :param str api_token: unique apitoken of user
         :return: response status (0 for success, 1 for no such user with api_token)
@@ -148,7 +148,7 @@ class TimeLogManager(models.Manager):
             if not time_log_instance.save():
                 return 0
             return 1
-        except:
+        except Exception:
             return 1
 
     def create_time_log(

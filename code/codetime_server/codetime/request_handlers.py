@@ -4,7 +4,6 @@ codetime server's APIs.
 """
 from .models import User, TimeLog
 from .serializers import UserSerializer, TimeLogSerializer
-from django.core.serializers import serialize
 
 
 def get_missing_param_response(data=None):

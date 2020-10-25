@@ -12,22 +12,26 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import environ
+
+env = environ.Env()
+
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "#_m3ov&v7pgr=uk2fkzf-1z7!(og99ti%4psxq3$%18sslf97!"
+
+SECRET_KEY = env("CODE_TIME_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -71,21 +75,27 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "codetime_server.wsgi.application"
 
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [],
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": os.environ["MYSQL_CODE_TIME_DB_NAME"],
-        "USER": os.environ["MYSQL_CODE_TIME_USER"],
-        "PASSWORD": os.environ["MYSQL_CODE_TIME_PASSWORD"],
-        "HOST": os.environ["MYSQL_CODE_TIME_HOST"],
-        "PORT": int(os.environ["MYSQL_CODE_TIME_CONNECTION_PORT"]),
+
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': env("MYSQL_CODE_TIME_DB_NAME"),
+        'USER': env("MYSQL_CODE_TIME_USER"),
+        'PASSWORD': env("MYSQL_CODE_TIME_PASSWORD"),
+        'HOST': env("MYSQL_CODE_TIME_HOST"),
+        'PORT': int(env("MYSQL_CODE_TIME_CONNECTION_PORT")),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -105,7 +115,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -119,10 +128,14 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(PROJECT_ROOT, "static")
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+CORS_ORIGIN_ALLOW_ALL = True

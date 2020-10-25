@@ -43,10 +43,12 @@ def when_activated(view):
 
                 curr_date = dt.now().strftime("%Y-%m-%d")
 
+
                 if curr_date not in file_times_dict:
                     file_times_dict[curr_date] = {}
 
                 if file_name not in file_times_dict[curr_date]:
+
                     file_times_dict[curr_date][file_name] = [
                         [start_time, end_time]
                     ]  # noqa: E501
@@ -64,6 +66,7 @@ def when_activated(view):
                 error=str(e), lno=str(exc_tb.tb_lineno)
             )
         )  # noqa: E501
+
 
 
 def when_deactivated(view):
@@ -88,6 +91,7 @@ def when_deactivated(view):
                 error=str(e), lno=str(exc_tb.tb_lineno)
             )
         )  # noqa: E501
+
 
 
 class CustomEventListener(sublime_plugin.EventListener):
@@ -128,6 +132,7 @@ class CustomEventListener(sublime_plugin.EventListener):
                 file_name is not None
                 and file_name in file_times_dict[curr_date]
             ):
+
                 end_time = time.time()
 
                 last_time_list = file_times_dict[curr_date][file_name][-1]
@@ -157,6 +162,7 @@ class CustomEventListener(sublime_plugin.EventListener):
             )  # noqa: E501
 
 
+
 # view.run_command('dashboard')
 class DashboardCommand(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -176,6 +182,7 @@ class DashboardCommand(sublime_plugin.TextCommand):
                 "codeTime:DashboardCommand():run() {error} on line number:"
                 + " {lno}".format(error=str(e), lno=str(exc_tb.tb_lineno))
             )  # noqa: E501
+
 
 
 def plugin_loaded():
@@ -202,3 +209,4 @@ def plugin_loaded():
                 error=str(e), lno=str(exc_tb.tb_lineno)
             )
         )  # noqa: E501
+

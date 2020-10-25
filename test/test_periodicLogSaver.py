@@ -2,10 +2,10 @@ import sublime
 import sys
 import os
 
-from datetime import datetime as dt
+# from datetime import datetime as dt
 from unittest import TestCase
-from unittest.mock import Mock, patch
 
+# from unittest.mock import Mock, patch
 
 periodicLogServer = sys.modules[
     "SE_Fall20_Project-1.SublimePlugin.\
@@ -28,6 +28,7 @@ class TestPeriodicLogSaver(TestCase):
 
             _ = logger.write_log_file(d, FILE_PATH)
 
+
             arr = []
             for local_date, file_dict in d.items():
                 for filenm, times_arr in file_dict.items():
@@ -45,6 +46,7 @@ class TestPeriodicLogSaver(TestCase):
                         arr.append(str1)
 
             with open(FILE_PATH, "r") as f:
+
                 lines = f.readlines()
                 self.assertEqual(lines, arr)
         finally:

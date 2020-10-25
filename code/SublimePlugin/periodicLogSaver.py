@@ -25,6 +25,7 @@ class PeriodicLogSaver(threading.Thread):
         self.kwargs = kwargs
         return
 
+
     def run(self):
         while True:
             try:
@@ -46,6 +47,7 @@ class PeriodicLogSaver(threading.Thread):
                         cf = curr_file
                         inMemoryLogDeepCopy[cd][cf][-1][1] = end_time
 
+
                         if curr_date not in inMemoryLog:
                             inMemoryLog[curr_date] = {}
 
@@ -64,6 +66,7 @@ class PeriodicLogSaver(threading.Thread):
                     )
                 )
 
+
     def write_log_file(self, file_times_dict):
         try:
 
@@ -73,6 +76,7 @@ class PeriodicLogSaver(threading.Thread):
                 sublime.active_window().active_view().settings().get("syntax")
             )
             with open(self.kwargs["LOG_FILE_PATH"], "a") as f:
+
                 for key, val in file_times_dict.items():
                     curr_date = key
                     file_dict = val
