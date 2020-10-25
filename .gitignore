@@ -439,3 +439,6 @@ x509.genkey
 
 # Clang's compilation database file
 /compile_commands.json
+code/codetime_server/docker-compose.yml
+code/codetime_server/Dockerfile
+code/codetime_server/run.sh

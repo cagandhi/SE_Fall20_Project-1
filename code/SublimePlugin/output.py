@@ -16,11 +16,12 @@ import os
 
 
 def show_graphs():
-    if platform.system() == 'Windows':
-        DATA_FOLDER_PATH = os.path.join(os.getenv('APPDATA'), '.codeTime')
+    if platform.system() == "Windows":
+        DATA_FOLDER_PATH = os.path.join(os.getenv("APPDATA"), ".codeTime")
     else:
-        DATA_FOLDER_PATH = os.path.join(os.path.expanduser('~'), '.codeTime')
-    LOG_FILE_PATH = os.path.join(DATA_FOLDER_PATH, '.sublime_logs')
+        DATA_FOLDER_PATH = os.path.join(os.path.expanduser("~"), ".codeTime")
+    LOG_FILE_PATH = os.path.join(DATA_FOLDER_PATH, ".sublime_logs")
+
 
     sample_data = open(LOG_FILE_PATH, "r").read()
     logs = sample_data.split("\n")
@@ -38,13 +39,27 @@ def show_graphs():
             else:
                 file_type = "other"
 
-            logs_dict[log_file_path] = {"st": start_time, "dt": datetime.strptime(log_date, "%Y-%m-%d"), "et": end_time, "duration": end_time - start_time, "type": file_type}  # noqa: E501
+            logs_dict[log_file_path] = {
+                "st": start_time,
+                "dt": datetime.strptime(log_date, "%Y-%m-%d"),
+                "et": end_time,
+                "duration": end_time - start_time,
+                "type": file_type,
+            }  # noqa: E501
         except Exception:
             continue
 
-    fig = tools.make_subplots(rows=3, cols=2, shared_xaxes=True, specs=[[{"colspan": 2}, None],  # noqa: E501
-                                    [{"type": "pie"}, {"type": "pie"}],  # noqa: E128
-                                    [{"colspan": 2, "type": "table"}, None]])
+    fig = tools.make_subplots(
+        rows=3,
+        cols=2,
+        shared_xaxes=True,
+        specs=[
+            [{"colspan": 2}, None],  # noqa: E501
+            [{"type": "pie"}, {"type": "pie"}],  # noqa: E128
+            [{"colspan": 2, "type": "table"}, None],
+        ],
+    )
+
 
     # ###############################- Pie Chart-
     durations = defaultdict(int)
@@ -53,7 +68,10 @@ def show_graphs():
         file_type = logs_dict[file_path]["type"]
         durations[file_type] += duration
 
-    trace_timespan = go.Pie(labels=list(durations.keys()), values=list(durations.values()))  # noqa: E501
+    trace_timespan = go.Pie(
+        labels=list(durations.keys()), values=list(durations.values())
+    )  # noqa: E501
+
     fig.append_trace(trace_timespan, 2, 1)
     fig.append_trace(trace_timespan, 2, 2)
     # ##############################
@@ -73,7 +91,13 @@ def show_graphs():
 
     data = []
     for file_type in durations.keys():
-        trace_timespan = go.Scatter(x=list(durations[file_type].keys()), y=list(durations[file_type].values()), name=file_type, fill='tozeroy')  # noqa: E501
+        trace_timespan = go.Scatter(
+            x=list(durations[file_type].keys()),
+            y=list(durations[file_type].values()),
+            name=file_type,
+            fill="tozeroy",
+        )  # noqa: E501
+
         # data.append(trace_timespan)
         fig.append_trace(trace_timespan, 1, 1)
     # fig = go.Figure(data=data)
@@ -88,8 +112,15 @@ def show_graphs():
     filenames = list(file_wise_durations.keys())
     durations = list(file_wise_durations.values())
 
-    data = [go.Table(header=dict(values=['FileName', 'Total Time Spent(seconds)']),  # noqa: E501
-                     cells=dict(values=[filenames, durations]))]  # noqa: E128
+    data = [
+        go.Table(
+            header=dict(
+                values=["FileName", "Total Time Spent(seconds)"]
+            ),  # noqa: E501
+            cells=dict(values=[filenames, durations]),
+        )
+    ]  # noqa: E128
+
     # fig = go.Figure(data=data)
     # plot(fig,filename="table.html")
 
