@@ -1,4 +1,4 @@
-# Reference :  Setup script documentation 
+# Reference :  Setup script documentation
 # https://setuptools.readthedocs.io/en/latest/setuptools.html
 
 from setuptools import setup, find_packages
