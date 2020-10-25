@@ -1,10 +1,12 @@
 import sublime_plugin
+import sublime
 import time
 import platform
 import os
 from datetime import datetime as dt
 import sys
 import subprocess
+import json
 
 from .periodicLogSaver import PeriodicLogSaver
 
@@ -20,10 +22,13 @@ if not os.path.exists(DATA_FOLDER_PATH):
 # define log file path
 LOG_FILE_PATH = os.path.join(DATA_FOLDER_PATH, ".sublime_logs")
 
+
 # define local variables
 file_times_dict = {}
 periodic_log_save_timeout = 300  # seconds
 periodic_log_save_on = True
+api_token = ""
+configs = None
 
 
 def when_activated(view):
@@ -155,34 +160,38 @@ class CustomEventListener(sublime_plugin.EventListener):
 # view.run_command('dashboard')
 class DashboardCommand(sublime_plugin.TextCommand):
     def run(self, edit):
+        # Load config file
+        configs = sublime.load_settings("CustomPreferences.sublime-settings")
         try:
             print("Showing Graphs")
             dir_path = os.path.dirname(os.path.realpath(__file__))
             subprocess.Popen(
-                "/Users/prithvirajchaudhuri/Desktop/CSC510/Project/venv/bin/"
-                + "python3 '"
-                + dir_path
-                + "/output.py'",
+                configs.get("python-env") + "'" + dir_path + "/output.py'",
                 shell=True,
                 stdout=subprocess.PIPE,
             )  # noqa: E501, F841
         except Exception as e:
             exc_type, exc_obj, exc_tb = sys.exc_info()
             print(
-                "codeTime:DashboardCommand():run() {error} on line number: {lno}".format(
-                    error=str(e), lno=str(exc_tb.tb_lineno)
-                )
+                "codeTime:DashboardCommand():run() {error} on line number:"
+                + " {lno}".format(error=str(e), lno=str(exc_tb.tb_lineno))
             )  # noqa: E501
 
 
 def plugin_loaded():
     try:
+        configs = sublime.load_settings("CustomPreferences.sublime-settings")
+        periodic_log_save_timeout = configs.get("timeout")
+        api_token = configs.get("api_token")
+        request_url = configs.get("request-url")
         if periodic_log_save_on:
             periodcLogSaver = PeriodicLogSaver(
                 kwargs={
                     "inMemoryLog": file_times_dict,
                     "timeout": periodic_log_save_timeout,
                     "LOG_FILE_PATH": LOG_FILE_PATH,
+                    "API_TOKEN": api_token,
+                    "REQUEST_URL": request_url,
                 }
             )  # noqa: E501
             periodcLogSaver.start()

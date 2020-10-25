@@ -68,7 +68,10 @@ class PeriodicLogSaver(threading.Thread):
         try:
 
             obj = []
-            api_token = "74815790-d740-4344-b9c3-a505514edf88VHSda13oJOr5Iba4"
+            api_token = self.kwargs["API_TOKEN"]
+            file_type = (
+                sublime.active_window().active_view().settings().get("syntax")
+            )
             with open(self.kwargs["LOG_FILE_PATH"], "a") as f:
                 for key, val in file_times_dict.items():
                     curr_date = key
@@ -89,16 +92,16 @@ class PeriodicLogSaver(threading.Thread):
                             row = {}
                             row["file_name"] = file_name.split("/")[-1]
                             row["file_extension"] = file_name.split(".")[-1]
-                            row["detected_language"] = file_name.split(".")[-1]
+                            row["detected_language"] = file_type.split("/")[
+                                -1
+                            ].split(".")[-2]
                             row["log_date"] = curr_date
                             row["log_timestamp"] = str(time_start_end[0])
                             row["api_token"] = api_token
                             obj.append(row)
                 f.close()
 
-                req = urllib.request.Request(
-                    "http://localhost:8000/codetime/timelog/"
-                )
+                req = urllib.request.Request(self.kwargs["REQUEST_URL"])
                 req.add_header(
                     "Content-Type", "application/json; charset=utf-8"
                 )
