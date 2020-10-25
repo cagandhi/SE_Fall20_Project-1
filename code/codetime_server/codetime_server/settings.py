@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import environ
+env = environ.Env()
+
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -21,7 +25,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '#_m3ov&v7pgr=uk2fkzf-1z7!(og99ti%4psxq3$%18sslf97!'
+SECRET_KEY = env("CODE_TIME_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -84,11 +88,11 @@ REST_FRAMEWORK = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ["MYSQL_CODE_TIME_DB_NAME"],
-        'USER': os.environ["MYSQL_CODE_TIME_USER"],
-        'PASSWORD': os.environ["MYSQL_CODE_TIME_PASSWORD"],
-        'HOST': os.environ["MYSQL_CODE_TIME_HOST"],
-        'PORT': int(os.environ["MYSQL_CODE_TIME_CONNECTION_PORT"]),
+        'NAME': env("MYSQL_CODE_TIME_DB_NAME"),
+        'USER': env("MYSQL_CODE_TIME_USER"),
+        'PASSWORD': env("MYSQL_CODE_TIME_PASSWORD"),
+        'HOST': env("MYSQL_CODE_TIME_HOST"),
+        'PORT': int(env("MYSQL_CODE_TIME_CONNECTION_PORT")),
     }
 }
 
@@ -130,3 +134,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+CORS_ORIGIN_ALLOW_ALL = True
