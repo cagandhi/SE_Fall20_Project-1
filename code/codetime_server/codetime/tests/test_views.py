@@ -5,24 +5,17 @@
 
 # Scenario: # Enter scenario name here
 # Enter steps here
-
-import copy
 from django.test import TestCase, Client
 from django.urls import reverse
-from django.core import serializers
-import codetime.views
-from codetime.models import TimeLog, User
+from codetime.models import User
 
-
-users_date={
-    "log_user_id":123,
-    "username":"ayushi",
-    "password":"123ayushi",
-    "api_token":"1234abcd",
+users_data = {
+    "log_user_id": 123,
+    "username": "ayushi",
+    "password": "123ayushi",
+    "api_token": "1234abcd",
 
 }
-
-
 
 
 class TestPostViews(TestCase):
@@ -41,6 +34,6 @@ class TestPostViews(TestCase):
         """
         Test behaviour of correct POST request for creating a course workspace
         """
-        response = self.client.post(self.user_url, data=course_data, content_type='application/json')
+        response = self.client.post(self.user_url, data=users_data, content_type='application/json')
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(Course.objects.all().count(), 1)
+        self.assertEqual(User.objects.all().count(), 1)

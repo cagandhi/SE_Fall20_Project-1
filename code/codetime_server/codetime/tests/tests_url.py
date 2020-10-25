@@ -1,9 +1,9 @@
-from django.test import TestCase
-
 # Create your tests here.
 from django.test import SimpleTestCase
 from django.urls import resolve, reverse
 import codetime.views
+
+
 # Create your tests here.
 
 
