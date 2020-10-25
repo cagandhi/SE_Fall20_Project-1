@@ -20,11 +20,15 @@ class PeriodicLogSaver(threading.Thread):
             try:
                 curr_file = sublime.active_window().active_view().file_name()
                 curr_date = dt.now().strftime('%Y-%m-%d')
+                
+####Making a deep copy of the memory log
 
                 if curr_file is not None:
                     inMemoryLogDeepCopy = copy.deepcopy(self.kwargs['inMemoryLog'])
                     inMemoryLog = self.kwargs['inMemoryLog']
                     inMemoryLog.clear()
+                    
+####Writing the current date and file inMemoryLogDeepCopy by calling write_log_file
 
                     if curr_date in inMemoryLogDeepCopy and curr_file in inMemoryLogDeepCopy[curr_date]:  # noqa: E501
                         end_time = time.time()
@@ -43,7 +47,8 @@ class PeriodicLogSaver(threading.Thread):
             except Exception as e:
                 exc_type, exc_obj, exc_tb = sys.exc_info()
                 print("periodicLogSaver:PeriodicLogSaver:run(): {error} on line number: {lno}".format(error=str(e), lno=str(exc_tb.tb_lineno)))  # noqa: E501
-
+                
+####Writing the log file output in inMemoryLogDeepCopy in a file
     def write_log_file(self, file_times_dict):
         try:
 
