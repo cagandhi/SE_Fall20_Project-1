@@ -1,14 +1,11 @@
-# Contributing to SE-PROJECT-1
+# Contributing to CodeTime
 
 :+1::tada: First off, thanks for taking the time to contribute! :tada::+1:
 
-The following is a set of guidelines for contributing to CSC 510 Project 1 and its packages, which are hosted on the [GitHub project page](https://github.com/oaaky/SE_Fall20_Project-1.git). These are mostly guidelines, not rules. Use your best judgment, and feel free to propose changes to this document in a pull request.
+Thank you so much for taking an interest in contributing! We are lookng forward to contributions that will enable lesser human intervention!! There are many ways to contribute to this porject!
 
 #### Table Of Contents
-
-[Code of Conduct](#code-of-conduct)
-
-[What should I know before I get started?](#what-should-i-know-before-i-get-started)
+[Code of Conduct](CODE_OF_CONDUCT.md)
 
 [How Can I Contribute?](#how-can-i-contribute)
   * [Reporting Bugs](#reporting-bugs)
@@ -16,22 +13,14 @@ The following is a set of guidelines for contributing to CSC 510 Project 1 and i
   * [Your First Code Contribution](#your-first-code-contribution)
   * [Pull Requests](#pull-requests)
 
-[Styleguides](#styleguides)
-  * [Coding Style](#coding-style)
-  * [Git Commit Messages](#git-commit-messages)
+[Styleguide](#styleguide)
 
-## Code of Conduct
-
-This project and everyone participating in it is governed by the [Code of Conduct](CODE-OF-CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [cagandhi97@gmail.com](mailto:cagandhi97@gmail.com).
-
-## What should I know before I get started?
-
-This is a sample project that sets up some base project files for future work. Please look through the [README](README.md) file.
-
-* For feature requests, please fork the repository, create a new branch with your feature changes and make a pull request. The maintainers will review the code change and merge it into the master branch once checks have successfully passed.
-* Provide documentation for the modifications in the code. It will be easier and quicker for the maintainers to review and approve your code if you have added meaningful comments to your code change.
+[Attribution](#attribution)
 
 ## How Can I Contribute?
+
+Each contribution counts for our project. So make sure to classify which is yours.
+
 
 ### Reporting Bugs
 
