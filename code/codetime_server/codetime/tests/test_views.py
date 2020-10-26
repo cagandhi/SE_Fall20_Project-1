@@ -10,7 +10,6 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.utils import json
 
-from codetime.models import User
 
 users_data = {
     "log_user_id": 1223,
