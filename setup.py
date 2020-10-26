@@ -10,7 +10,6 @@ def get_requirements(filename):
     return requirements
 
 
-
 setup(name='codeTime',
       setup_requires=['pytest-runner', 'pytest-pylint'],
       tests_require=['pytest', 'pylint'],
