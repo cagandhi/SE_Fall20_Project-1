@@ -15,6 +15,7 @@ before_install:
 
 install:
   - pip install flake8==3.5
+  - pip install coverage
   - sh travis.sh bootstrap
   - pip install -r code/codetime_server/requirements.txt
 

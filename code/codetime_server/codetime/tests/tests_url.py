@@ -1,7 +1,7 @@
 # Create your tests here.
 from django.test import SimpleTestCase
 from django.urls import resolve, reverse
-from ..views import TimeLogView,UserView
+from ..views import TimeLogView, UserView
 
 
 # Create your tests here.

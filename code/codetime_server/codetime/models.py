@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils.crypto import get_random_string
-from django.utils.timezone import now
 from django.core import serializers
 import uuid
 import json
