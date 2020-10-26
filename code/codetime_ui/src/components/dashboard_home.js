@@ -220,7 +220,7 @@ export default class Dashboard_home extends PureComponent{
                                                  <Legend />
                                                  {/*<Line type="monotone" dataKey="total_time" stroke="#8884d8" activeDot={{ r: 8 }} />*/}
                                                  <Line type="monotone" dataKey="language_count" stroke="#8884d8" activeDot={{ r: 8 }} />
-                                                 <Line type="monotone" dataKey="file_count" stroke="#8884d8" activeDot={{ r: 8 }} />
+                                                 <Line type="monotone" dataKey="file_count" stroke="#82ca9d" activeDot={{ r: 8 }} />
                                              </LineChart>
                                          </ResponsiveContainer>
                                      </Col>
