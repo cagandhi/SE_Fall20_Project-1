@@ -54,4 +54,4 @@ class TimeLogSummaryView(generics.ListAPIView):
         TimeLogSummary get request
         """
         response = handle_summary_request(request)
-        return Response(data=response)
+        return Response(data=response, status=response.get('status', 200))

@@ -29,11 +29,10 @@ users_data1 = {
 }
 
 timeLog_data = [{
-    "log_file_time_id": 22,
     "file_name": "test",
     "file_extension": "py",
     "detected_language": "python",
-    "log_date": str(datetime.date),
+    "log_date": datetime.datetime.now().strftime("%Y-%m-%d"),
     "end_timestamp": time.time() + 500,
     "start_timestamp": time.time(),
     "api_token": "sample"
@@ -52,6 +51,7 @@ class TestPostViews(TestCase):
         self.client = Client()
         self.user_url = reverse('user_endpoint')
         self.timelog_url = reverse('timelog_url')
+        self.summary_url = reverse('timelog_summary_url')
         # User.objects.create_user(users_data)
 
     def test_user(self):
@@ -67,6 +67,7 @@ class TestPostViews(TestCase):
         user_Details = User.objects.get_user_from_username(username='ayushi2', password='123ayushi1')
         self.assertEqual(user_Details.get('username'), users_data['username'])
         self.assertEqual(user_Details.get('password'), users_data['password'])
+        self.assertEqual(response.data["data"]["api_token"], user_Details.get('api_token'))
         self.assertNotEquals(user_Details.get('api_token'), None)
 
     def test_logtime(self):
@@ -76,6 +77,7 @@ class TestPostViews(TestCase):
         user_url = f"{self.user_url}?type=signup"
         response = self.client.post(user_url, data=json.dumps(users_data1), content_type='application/json')
         user_Details = User.objects.get_user_from_username(username='ayushi2', password='123ayushi1')
+        self.assertEqual(response.data["data"]["api_token"], user_Details.get('api_token'))
         timeLog_data[0]["api_token"] = user_Details.get('api_token')
         response = self.client.post(self.timelog_url, data=json.dumps(timeLog_data), content_type='application/json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -98,10 +100,3 @@ class TestPostViews(TestCase):
         user_url = f"{self.user_url}?type=signin"
         response = self.client.post(user_url, data=json.dumps(users_data1), content_type='application/json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-
-    def test_incorrect_post_file_log(self):
-        """
-        Test post request for non existing user
-        """
-        response = self.client.post(self.timelog_url, data=json.dumps(timeLog_data), content_type='application/json')
-        self.assertEqual(response.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)
