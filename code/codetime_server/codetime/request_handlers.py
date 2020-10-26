@@ -54,7 +54,7 @@ def get_valid_output_response(data):
     return response
 
 
-def get_valid_post_response():
+def get_valid_post_response(data):
     """
     Returns success message correct processing of post/get request
 
@@ -62,7 +62,7 @@ def get_valid_post_response():
     :return: response
     :rtype: object
     """
-    response = {"status": 201, "message": "Created"}
+    response = {"status": 201, "message": "Created", "data": data}
 
     return response
 
@@ -126,7 +126,7 @@ def handle_user_post(request):
                     data = User.objects.get_user_from_username(
                         request.data["username"], request.data["password"]
                     )
-                    return get_valid_post_response()
+                    return get_valid_post_response(data)
                 elif return_status == 1:
                     return get_something_went_wrong_response(request.data)
                 elif return_status == 2:
@@ -138,7 +138,7 @@ def handle_user_post(request):
                 )
 
                 if return_status:
-                    return get_valid_post_response()
+                    return get_valid_post_response(return_status)
                 else:
                     return get_invalid_user_credentials(request.data)
         else:

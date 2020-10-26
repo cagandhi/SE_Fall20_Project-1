@@ -38,7 +38,6 @@ timeLog_data = {
     "modified_at": str(datetime.datetime.now() + datetime.timedelta(hours=2))
 }
 
-
 class TestPostViews(TestCase):
     """
     Tests to verify the functioning of all the POST requests in bot_server/api
@@ -63,14 +62,22 @@ class TestPostViews(TestCase):
         user_url = f"{self.user_url}?type=login"
         response = self.client.post(user_url, data=json.dumps(users_data1), content_type='application/json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        user_Details = User.objects.get_user_from_username(username='ayushi2', password='123ayushi1')
-        self.assertEqual(user_Details.get('username'), users_data['username'])
-        self.assertEqual(user_Details.get('password'), users_data['password'])
-        self.assertNotEquals(user_Details.get('api_token'), None)
+        user_url = f"{self.user_url}?api_token=%s" % (response.json()["data"]["api_token"])
+        user_Details = self.client.get(user_url)
+        self.assertEqual(user_Details.json()["data"]["username"], users_data['username'])
+        self.assertEqual(user_Details.json()["data"]['password'], users_data['password'])
+        self.assertEquals(user_Details.json()["data"]['api_token'], response.json()["data"]["api_token"])
 
     def test_logtime(self):
         """
                 Test behaviour of correct POST request for creating a user
                 """
-        response = self.client.post(self.timelog_url, data=json.dumps(timeLog_data), content_type='application/json')
+        user_url = f"{self.user_url}?type=signup"
+        response = self.client.post(user_url, data=json.dumps(users_data1), content_type='application/json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        user_url = f"{self.user_url}?type=login"
+        response = self.client.post(user_url, data=json.dumps(users_data1), content_type='application/json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        timeLog_data["api_token"]=response.json()["data"]["api_token"]
+        timelog_post=self.client.post(self.timelog_url, data=json.dumps(timeLog_data), content_type='application/json')
+        self.assertEqual(timelog_post.status_code, status.HTTP_201_CREATED)
