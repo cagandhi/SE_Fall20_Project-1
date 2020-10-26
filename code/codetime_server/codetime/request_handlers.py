@@ -94,9 +94,9 @@ def get_invalid_user_credentials(data=None):
 
 
 def handle_user_get(request):
-    
+
     api_token = request.query_params.get("api_token", None)
-    
+
     if api_token:
         response = User.objects.get_user_from_api_token(api_token=api_token)
         return {"status": 0, "message": "Success", "data": response}
@@ -200,36 +200,40 @@ def handle_get_file_logs(request):
 
 
 def handle_summary_request(request):
-    
+    """
+    Handler for get request to summary records for a user.
+
+    :param HTTP GET request: request
+    :return: response
+    :rtype: object
+    """
     api_token = request.query_params.get("api_token", None)
     summary_type = request.query_params.get("type", None)
-    
+
     if api_token is not None and summary_type is not None:
-        
+
         if summary_type == "extension":
             response = TimeLog.objects.get_file_name_extension_wise_summary(api_token=api_token)
             return {
                 "status": 0,
                 "data": response
             }
-        
+
         elif summary_type == "weekday":
             response = TimeLog.objects.get_weekday_count_summary(api_token=api_token)
             return {
                 "status": 0,
                 "data": response
             }
-        
+
         elif summary_type == "language_total_time":
-    
             response = TimeLog.objects.get_time_spent_per_coding_language(api_token=api_token)
             return {
                 "status": 0,
                 "data": response
             }
-        
+
         elif summary_type == "file_name_total_time":
-    
             response = TimeLog.objects.get_time_spent_per_file(api_token=api_token)
             return {
                 "status": 0,
