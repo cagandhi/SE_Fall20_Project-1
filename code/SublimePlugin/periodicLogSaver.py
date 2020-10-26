@@ -37,7 +37,7 @@ class PeriodicLogSaver(threading.Thread):
                     inMemoryLog = inMemLog
                     inMemoryLog.clear()
 
-                    ####Writing the current date and file inMemoryLogDeepCopy by calling write_log_file
+                    # Writing the current date and file inMemoryLogDeepCopy by calling write_log_file
 
                     if (
                             curr_date in inMemoryLogDeepCopy
@@ -111,17 +111,12 @@ class PeriodicLogSaver(threading.Thread):
                 jsondata = json.dumps(obj)
                 jsondataasbytes = jsondata.encode("utf-8")
                 req.add_header("Content-Length", len(jsondataasbytes))
-                response = (
-                    urllib.request.urlopen(req, jsondataasbytes)
-                        .read()
-                        .decode()
-                )
 
         except Exception as e:
             exc_type, exc_obj, exc_tb = sys.exc_info()
             print(
                 "periodicLogSaver:PeriodicLogSaver():write_log_file(): {error} \
-                    on line number: {lno}".format(
+                on line number: {lno}".format(
                     error=str(e), lno=str(exc_tb.tb_lineno)
                 )
             )  # noqa: E501
