@@ -247,3 +247,11 @@ def handle_summary_request(request):
                 "status": 0,
                 "data": response
             }
+        
+        elif summary_type == "recent_stats":
+            
+            response = TimeLog.objects.get_user_recent_stats(api_token=api_token)
+            return {
+                "status": 0,
+                "data": response
+            }

@@ -294,6 +294,18 @@ class TimeLogManager(models.Manager):
             
         return ans
 
+    def get_user_recent_stats(self, api_token):
+        
+        summary = self.raw(f'select 1 as log_file_time_id, api_token, log_date, count(distinct file_name) file_count, count(distinct detected_language ) language_count, sum(end_timestamp - start_timestamp) total_time from log_file_time where api_token = "{api_token}" group by 1, 2, 3 order by 3 limit 30')
+        ans = []
+
+        for entry in summary:
+            val = {"file_count": entry.file_count, "language_count": entry.language_count,
+                   "total_time": entry.total_time, "api_token": api_token, "log_date": entry.log_date}
+            ans.append(val)
+
+        return ans
+    
 
 class TimeLog(models.Model):
     '''
