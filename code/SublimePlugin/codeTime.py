@@ -6,7 +6,6 @@ import os
 from datetime import datetime as dt
 import sys
 import subprocess
-import json
 
 from .periodicLogSaver import PeriodicLogSaver
 
@@ -21,7 +20,6 @@ if not os.path.exists(DATA_FOLDER_PATH):
 
 # define log file path
 LOG_FILE_PATH = os.path.join(DATA_FOLDER_PATH, ".sublime_logs")
-
 
 # define local variables
 file_times_dict = {}
@@ -42,7 +40,6 @@ def when_activated(view):
                 end_time = None
 
                 curr_date = dt.now().strftime("%Y-%m-%d")
-
 
                 if curr_date not in file_times_dict:
                     file_times_dict[curr_date] = {}
@@ -68,7 +65,6 @@ def when_activated(view):
         )  # noqa: E501
 
 
-
 def when_deactivated(view):
     try:
         window = view.window()
@@ -91,7 +87,6 @@ def when_deactivated(view):
                 error=str(e), lno=str(exc_tb.tb_lineno)
             )
         )  # noqa: E501
-
 
 
 class CustomEventListener(sublime_plugin.EventListener):
@@ -129,8 +124,8 @@ class CustomEventListener(sublime_plugin.EventListener):
             file_name = view.file_name()
             curr_date = dt.now().strftime("%Y-%m-%d")
             if (
-                file_name is not None
-                and file_name in file_times_dict[curr_date]
+                    file_name is not None
+                    and file_name in file_times_dict[curr_date]
             ):
 
                 end_time = time.time()
@@ -162,7 +157,6 @@ class CustomEventListener(sublime_plugin.EventListener):
             )  # noqa: E501
 
 
-
 # view.run_command('dashboard')
 class DashboardCommand(sublime_plugin.TextCommand):
     def run(self, edit):
@@ -178,11 +172,7 @@ class DashboardCommand(sublime_plugin.TextCommand):
             )  # noqa: E501, F841
         except Exception as e:
             exc_type, exc_obj, exc_tb = sys.exc_info()
-            print(
-                "codeTime:DashboardCommand():run() {error} on line number:"
-                + " {lno}".format(error=str(e), lno=str(exc_tb.tb_lineno))
-            )  # noqa: E501
-
+            print("codeTime:DashboardCommand():run() {error} on line number: {lno}".format(error=str(e), lno=str(exc_tb.tb_lineno)))
 
 
 def plugin_loaded():
@@ -209,4 +199,3 @@ def plugin_loaded():
                 error=str(e), lno=str(exc_tb.tb_lineno)
             )
         )  # noqa: E501
-

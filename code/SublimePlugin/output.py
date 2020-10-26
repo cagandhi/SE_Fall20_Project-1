@@ -22,7 +22,6 @@ def show_graphs():
         DATA_FOLDER_PATH = os.path.join(os.path.expanduser("~"), ".codeTime")
     LOG_FILE_PATH = os.path.join(DATA_FOLDER_PATH, ".sublime_logs")
 
-
     sample_data = open(LOG_FILE_PATH, "r").read()
     logs = sample_data.split("\n")
 
@@ -59,7 +58,6 @@ def show_graphs():
             [{"colspan": 2, "type": "table"}, None],
         ],
     )
-
 
     # ###############################- Pie Chart-
     durations = defaultdict(int)
