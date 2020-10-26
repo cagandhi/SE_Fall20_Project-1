@@ -102,7 +102,6 @@ class PeriodicLogSaver(threading.Thread):
                             row["log_timestamp"] = str(time_start_end[0])
                             row["api_token"] = api_token
                             obj.append(row)
-                f.close()
 
                 req = urllib.request.Request(self.kwargs["REQUEST_URL"])
                 req.add_header(
