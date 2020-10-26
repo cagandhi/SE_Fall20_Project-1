@@ -5,6 +5,15 @@ matrix:
 
 services:
   - xvfb
+  - mysql
+
+env:
+  - MYSQL_CODE_TIME_DB_NAME=codetime_db
+  - MYSQL_CODE_TIME_USER=root
+  - MYSQL_CODE_TIME_PASSWORD=group18
+  - MYSQL_CODE_TIME_HOST=localhost
+  - MYSQL_CODE_TIME_CONNECTION_PORT=3306
+  - CODE_TIME_SECRET_KEY=Sample
 
 before_install:
   - curl -OL https://raw.githubusercontent.com/SublimeText/UnitTesting/master/sbin/travis.sh
@@ -12,8 +21,10 @@ before_install:
 install:
   - pip install flake8==3.5
   - sh travis.sh bootstrap
+  - pip install -r code/codetime_server/requirements.txt
 
 script:
   - flake8 --max-line-length=150
   - sh travis.sh run_tests
+  - python code/codetime_server/manage.py test codetime.tests
 
