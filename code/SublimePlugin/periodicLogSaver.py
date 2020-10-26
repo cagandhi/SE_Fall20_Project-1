@@ -95,11 +95,10 @@ class PeriodicLogSaver(threading.Thread):
                             row = {}
                             row["file_name"] = file_name.split("/")[-1]
                             row["file_extension"] = file_name.split(".")[-1]
-                            row["detected_language"] = file_type.split("/")[
-                                -1
-                            ].split(".")[-2]
+                            row["detected_language"] = file_type.split("/")[-1].split(".")[-2]
                             row["log_date"] = curr_date
-                            row["log_timestamp"] = str(time_start_end[0])
+                            row["start_timestamp"] = str(time_start_end[0])
+                            row["end_timestamp"] = str(time_start_end[1])
                             row["api_token"] = api_token
                             obj.append(row)
 

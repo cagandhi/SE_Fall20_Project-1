@@ -110,7 +110,7 @@ class UserManager(models.Manager):
         if user_info:
             return user_info["api_token"]
         return -1
-        
+
 
 class User(models.Model):
     '''
@@ -206,35 +206,54 @@ class TimeLogManager(models.Manager):
             return e
 
     def get_file_name_extension_wise_summary(self, api_token):
-    
+        """
+        Get fileextension wise log summary for a particular user
+
+        :param str api_token: unique token for each user
+        :return: list of all the file logs of the user
+        :rtype: list
+        """
         summary = self.raw(
             f"select 1 as log_file_time_id, file_name, file_extension, count(*) from log_file_time where api_token=\"{api_token}\"  group by 1, 2, 3")
-        
+
         response = defaultdict(int)
-    
+
         for entry in summary:
             response[entry.file_extension] += 1
-            
+
         ans = []
         for key in dict(response):
             val = {"language": key, "count": response[key]}
             ans.append(val)
-            
+
         return ans
-    
+
     def get_weekday_count_summary(self, api_token):
-        
+        """
+        Get weekday's summary for a particular user
+
+        :param str api_token: unique token for each user
+        :return: list of count of logs per day of the user
+        :rtype: list
+        """
         summary = self.raw(f"select 1 as log_file_time_id, dayname(log_date) day, count(distinct detected_language) count from log_file_time where api_token=\"{api_token}\" group by 1,2")
-        
+
         ans = []
         for entry in summary:
             val = {"day": entry.day, "count": entry.count}
             ans.append(val)
-    
+
         return ans
-    
+
     def get_time_spent_per_coding_language(self, api_token):
-        
+        """
+        Get the record for time spent on various codeing languages
+        for a particular user
+
+        :param str api_token: unique token for each user
+        :return: list of time spent per coding language for the user
+        :rtype: list
+        """
         summary = self.raw(f'select 1 as log_file_time_id, detected_language, sum(end_timestamp - start_timestamp) total_time from log_file_time where api_token=\"{api_token}\" group by 1,2')
 
         ans = []
@@ -245,15 +264,22 @@ class TimeLogManager(models.Manager):
         return ans
 
     def get_time_spent_per_file(self, api_token):
-    
+        """
+        Get the record for time spent on on each of the file
+        for a particular user
+
+        :param str api_token: unique token for each user
+        :return: list of time spent per file for the user
+        :rtype
+        """
         summary = self.raw(
             f'select 1 as log_file_time_id, file_name, sum(end_timestamp - start_timestamp) total_time from log_file_time where api_token=\"{api_token}\" group by 1,2')
-    
+
         ans = []
         for entry in summary:
             val = {"file_name": entry.file_name, "total_time": entry.total_time}
             ans.append(val)
-    
+
         return ans
     
     def get_user_overall_stats(self, api_token):
@@ -279,7 +305,8 @@ class TimeLog(models.Model):
     :ivar file_extension: extension of the file (or file type)
     :ivar detected_language: language in the file
     :ivar log_date: date of when was the file logged
-    :ivar log_timestamp: time recorded for activity on file
+    :ivar start_timestamp: start time recorded for activity on file
+    :ivar end_timestamp: end time recorded for activity on file
     :ivar created_at: timestamp of when file was created
     :ivar modified_at: timestamp of when file was modified last
     '''
