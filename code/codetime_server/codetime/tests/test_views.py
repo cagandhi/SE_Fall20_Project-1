@@ -6,7 +6,8 @@
 # Scenario: # Enter scenario name here
 # Enter steps here
 import datetime
-
+import copy
+import time
 from django.test import TestCase, Client
 from django.urls import reverse
 from rest_framework import status
@@ -27,16 +28,16 @@ users_data1 = {
 
 }
 
-timeLog_data = {
+timeLog_data = [{
     "log_file_time_id": 22,
     "file_name": "test",
     "file_extension": "py",
     "detected_language": "python",
     "log_date": str(datetime.date),
-    "log_timestamp": str(datetime.datetime.now() + datetime.timedelta(hours=2)),
-    "created_at": str(datetime.datetime.now()),
-    "modified_at": str(datetime.datetime.now() + datetime.timedelta(hours=2))
-}
+    "end_timestamp": time.time() + 500,
+    "start_timestamp": time.time(),
+    "api_token": "sample"
+}]
 
 
 class TestPostViews(TestCase):
@@ -70,7 +71,37 @@ class TestPostViews(TestCase):
 
     def test_logtime(self):
         """
-                Test behaviour of correct POST request for creating a user
-                """
+        Test behaviour of correct POST request for creating a user
+        """
+        user_url = f"{self.user_url}?type=signup"
+        response = self.client.post(user_url, data=json.dumps(users_data1), content_type='application/json')
+        user_Details = User.objects.get_user_from_username(username='ayushi2', password='123ayushi1')
+        timeLog_data[0]["api_token"] = user_Details.get('api_token')
         response = self.client.post(self.timelog_url, data=json.dumps(timeLog_data), content_type='application/json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_incorrect_get_signedup_user(self):
+        """
+        Test behaviour of incorrect POST request for logging in a user
+        """
+        user_url = f"{self.user_url}?type=login"
+        response = self.client.post(f"{self.user_url}?type=signup", data=json.dumps(users_data1), content_type='application/json')
+        incorrect_user = copy.deepcopy(users_data1)
+        incorrect_user["password"] = "ayushi21"
+        response = self.client.post(user_url, data=json.dumps(incorrect_user), content_type='application/json')
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_invalid_user_signup_request(self):
+        """
+        Test behaviour of invalid POST request for logging in a user
+        """
+        user_url = f"{self.user_url}?type=signin"
+        response = self.client.post(user_url, data=json.dumps(users_data1), content_type='application/json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_incorrect_post_file_log(self):
+        """
+        Test post request for non existing user
+        """
+        response = self.client.post(self.timelog_url, data=json.dumps(timeLog_data), content_type='application/json')
+        self.assertEqual(response.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)
