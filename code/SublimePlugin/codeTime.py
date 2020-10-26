@@ -172,10 +172,7 @@ class DashboardCommand(sublime_plugin.TextCommand):
             )  # noqa: E501, F841
         except Exception as e:
             exc_type, exc_obj, exc_tb = sys.exc_info()
-            print(
-                "codeTime:DashboardCommand():run() {error} on line number:"
-                + " {lno}".format(error=str(e), lno=str(exc_tb.tb_lineno))
-            )  # noqa: E501
+            print("codeTime:DashboardCommand():run() {error} on line number: {lno}".format(error=str(e), lno=str(exc_tb.tb_lineno)))
 
 
 def plugin_loaded():

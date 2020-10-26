@@ -33,7 +33,8 @@ class TestPeriodicLogSaver(TestCase):
     def test_write_log_file(self):
         BASE_PATH = os.path.join(os.path.expanduser('~'), '.codeTime')
         FILE_PATH = os.path.join(BASE_PATH, '.temp_logs')
-        logger = periodicLogSaver.PeriodicLogSaver(kwargs={'LOG_FILE_PATH': FILE_PATH, 'API_TOKEN': 'abcdsedjk', 'REQUEST_URL': 'http://local/codetime'})
+        logger = periodicLogSaver.PeriodicLogSaver(kwargs={'LOG_FILE_PATH': FILE_PATH,
+                                                           'API_TOKEN': 'abcdsedjk', 'REQUEST_URL': 'http://local/codetime'})
         try:
             d = {'2020-09-19': {'temp1.py': [[1000, 2000], [3000, 3200]]},
                  '2020-09-20': {'temp2.py': [[5000, 6000]]}}  # noqa: E128, E501
