@@ -5,6 +5,7 @@ from django.core import serializers
 import uuid
 import json
 from django.db.utils import IntegrityError
+from collections import defaultdict
 
 # Create your models here.
 '''
@@ -109,7 +110,7 @@ class UserManager(models.Manager):
         if user_info:
             return user_info["api_token"]
         return -1
-
+        
 
 class User(models.Model):
     '''
@@ -204,6 +205,57 @@ class TimeLogManager(models.Manager):
             print("error in getting logs for user ", e)
             return e
 
+    def get_file_name_extension_wise_summary(self, api_token):
+    
+        summary = self.raw(
+            f"select 1 as log_file_time_id, file_name, file_extension, count(*) from log_file_time where api_token=\"{api_token}\"  group by 1, 2, 3")
+        
+        response = defaultdict(int)
+    
+        for entry in summary:
+            response[entry.file_extension] += 1
+            
+        ans = []
+        for key in dict(response):
+            val = {"language": key, "count": response[key]}
+            ans.append(val)
+            
+        return ans
+    
+    def get_weekday_count_summary(self, api_token):
+        
+        summary = self.raw(f"select 1 as log_file_time_id, dayname(log_date) day, count(distinct detected_language) count from log_file_time where api_token=\"{api_token}\" group by 1,2")
+        
+        ans = []
+        for entry in summary:
+            val = {"day": entry.day, "count": entry.count}
+            ans.append(val)
+    
+        return ans
+    
+    def get_time_spent_per_coding_language(self, api_token):
+        
+        summary = self.raw(f'select 1 as log_file_time_id, detected_language, sum(end_timestamp - start_timestamp) total_time from log_file_time where api_token=\"{api_token}\" group by 1,2')
+
+        ans = []
+        for entry in summary:
+            val = {"detected_language": entry.detected_language, "total_time": entry.total_time}
+            ans.append(val)
+
+        return ans
+
+    def get_time_spent_per_file(self, api_token):
+    
+        summary = self.raw(
+            f'select 1 as log_file_time_id, file_name, sum(end_timestamp - start_timestamp) total_time from log_file_time where api_token=\"{api_token}\" group by 1,2')
+    
+        ans = []
+        for entry in summary:
+            val = {"file_name": entry.file_name, "total_time": entry.total_time}
+            ans.append(val)
+    
+        return ans
+    
 
 class TimeLog(models.Model):
     '''
@@ -229,7 +281,8 @@ class TimeLog(models.Model):
     file_extension = models.CharField(max_length=20, null=True, blank=True)
     detected_language = models.CharField(max_length=50, null=True, blank=True)
     log_date = models.DateField(blank=False, null=False)
-    log_timestamp = models.FloatField(blank=False, null=False)
+    start_timestamp = models.FloatField(blank=False, null=False)
+    end_timestamp = models.FloatField(blank=False, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     objects = TimeLogManager()

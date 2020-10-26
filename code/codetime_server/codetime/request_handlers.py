@@ -88,9 +88,18 @@ def get_invalid_user_credentials(data=None):
     :return: response
     :rtype: object
     """
-    response = {"status": 1, "message": "Invalid user credentials.", "data": data}
+    response = {"status": 200, "message": "Invalid user credentials.", "data": data}
 
     return response
+
+
+def handle_user_get(request):
+    
+    api_token = request.query_params.get("api_token", None)
+    
+    if api_token:
+        response = User.objects.get_user_from_api_token(api_token=api_token)
+        return {"status": 0, "message": "Success", "data": response}
 
 
 def handle_user_post(request):
@@ -130,7 +139,7 @@ def handle_user_post(request):
                 )
 
                 if return_status:
-                    return get_valid_post_response()
+                    return get_valid_output_response(data=return_status)
                 else:
                     return get_invalid_user_credentials(request.data)
         else:
@@ -188,3 +197,41 @@ def handle_get_file_logs(request):
             return get_invalid_request_param(response)
     else:
         return get_missing_param_response("api_token")
+
+
+def handle_summary_request(request):
+    
+    api_token = request.query_params.get("api_token", None)
+    summary_type = request.query_params.get("type", None)
+    
+    if api_token is not None and summary_type is not None:
+        
+        if summary_type == "extension":
+            response = TimeLog.objects.get_file_name_extension_wise_summary(api_token=api_token)
+            return {
+                "status": 0,
+                "data": response
+            }
+        
+        elif summary_type == "weekday":
+            response = TimeLog.objects.get_weekday_count_summary(api_token=api_token)
+            return {
+                "status": 0,
+                "data": response
+            }
+        
+        elif summary_type == "language_total_time":
+    
+            response = TimeLog.objects.get_time_spent_per_coding_language(api_token=api_token)
+            return {
+                "status": 0,
+                "data": response
+            }
+        
+        elif summary_type == "file_name_total_time":
+    
+            response = TimeLog.objects.get_time_spent_per_file(api_token=api_token)
+            return {
+                "status": 0,
+                "data": response
+            }
