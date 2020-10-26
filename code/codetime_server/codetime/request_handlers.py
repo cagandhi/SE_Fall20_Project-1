@@ -88,7 +88,7 @@ def get_invalid_user_credentials(data=None):
     :return: response
     :rtype: object
     """
-    response = {"status": 200, "message": "Invalid user credentials.", "data": data}
+    response = {"status": 401, "message": "Invalid user credentials.", "data": data}
 
     return response
 
@@ -99,7 +99,7 @@ def handle_user_get(request):
 
     if api_token:
         response = User.objects.get_user_from_api_token(api_token=api_token)
-        return {"status": 0, "message": "Success", "data": response}
+        return get_valid_output_response(data=response)
 
 
 def handle_user_post(request):
@@ -127,7 +127,7 @@ def handle_user_post(request):
                     data = User.objects.get_user_from_username(
                         request.data["username"], request.data["password"]
                     )
-                    return get_valid_output_response(data)
+                    return get_valid_post_response()
                 elif return_status == 1:
                     return get_something_went_wrong_response(request.data)
                 elif return_status == 2:
@@ -139,7 +139,7 @@ def handle_user_post(request):
                 )
 
                 if return_status:
-                    return get_valid_output_response(data=return_status)
+                    return get_valid_post_response()
                 else:
                     return get_invalid_user_credentials(request.data)
         else:
@@ -160,7 +160,7 @@ def handle_log_file_post(request):
     return_data = dict()
     return_data["created"] = []
     return_data["failed"] = []
-    return_status = 200
+    return_status = 201
 
     for data_point in request.data:
 

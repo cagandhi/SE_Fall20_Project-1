@@ -20,7 +20,7 @@ class UserView(generics.ListCreateAPIView, generics.RetrieveUpdateDestroyAPIView
         User post/signup and login request
         """
         response = handle_user_post(request)
-        return Response(data=response)
+        return Response(data=response,status=201)
 
 
 class TimeLogView(generics.ListAPIView, generics.CreateAPIView):
@@ -33,7 +33,7 @@ class TimeLogView(generics.ListAPIView, generics.CreateAPIView):
         TimeLog post request
         """
         response = handle_log_file_post(request)
-        return Response(data=response, status=200)
+        return Response(data=response, status=201)
 
     def get(self, request, *args, **kwargs):
         """

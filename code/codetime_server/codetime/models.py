@@ -152,44 +152,6 @@ class TimeLogManager(models.Manager):
         except Exception:
             return 1
 
-    def create_time_log(
-        self, api_token, file_name, file_extension, detected_language, log_date, log_timestamp
-    ):
-        """
-        Create a new log for a file for a particular user
-
-        :param str api_token: unique token for each user
-        :param str file_name: file being edited by user
-        :param str file_extension: extension of the file (or file type)
-        :param str detected_language: language in the file
-        :param str log_date: date of when was the file logged
-        :param str log_timestamp: time recorded for activity on file
-        :return: api_token on success
-        :rtype: str
-        """
-        try:
-            user = User.objects.filter(api_token=api_token).first()
-            file_log = self.filter(log_user_id=user, file_name=file_name).first()
-            if file_log is not None:
-                log_timestamp = file_log.log_timestamp + log_timestamp
-                self.filter(log_user_id=user, file_name=file_name).update(
-                    log_timestamp=log_timestamp, modified_at=now()
-                )
-            else:
-                self.create(
-                    log_user_id=user,
-                    file_name=file_name,
-                    file_extension=file_extension,
-                    detected_language=detected_language,
-                    log_date=log_date,
-                    log_timestamp=log_timestamp,
-                )
-
-            return api_token
-        except Exception as e:
-            print("error in creating logs for user ", e)
-            return e
-
     def get_time_logs(self, api_token):
         """
         Get all the filelogs for a particular user
