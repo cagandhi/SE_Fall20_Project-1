@@ -7,13 +7,22 @@
 # Enter steps here
 from django.test import TestCase, Client
 from django.urls import reverse
+from rest_framework import status
+from rest_framework.utils import json
+
 from codetime.models import User
 
 users_data = {
-    "log_user_id": 123,
-    "username": "ayushi",
-    "password": "123ayushi",
-    "api_token": "1234abcd",
+    "log_user_id": 1223,
+    "username": "ayushi2",
+    "password": "123ayushi1",
+    "api_token": "1234abcd"
+
+}
+
+users_data1 = {
+    "username": "ayushi2",
+    "password": "123ayushi1"
 
 }
 
@@ -29,11 +38,12 @@ class TestPostViews(TestCase):
         """
         self.client = Client()
         self.user_url = reverse('user_endpoint')
+        # User.objects.create_user(users_data)
 
-    def test_post_user(self):
+    def test_get_user(self):
         """
-        Test behaviour of correct POST request for creating a course workspace
+        Test behaviour of correct POST request for creating a user
         """
-        response = self.client.post(self.user_url, data=users_data, content_type='application/json')
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(User.objects.all().count(), 1)
+        user_url = f"{self.user_url}?type=signup"
+        response = self.client.post(user_url, data=json.dumps(users_data1), content_type='application/json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
