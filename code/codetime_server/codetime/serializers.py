@@ -23,7 +23,8 @@ class TimeLogSerializer(serializers.Serializer):
     file_extension = serializers.CharField(max_length=20, required=True)
     detected_language = serializers.CharField(max_length=50, required=True)
     log_date = serializers.DateField(required=True)
-    log_timestamp = serializers.FloatField(required=True)
+    start_timestamp = serializers.FloatField(required=True)
+    end_timestamp = serializers.FloatField(required=True)
     api_token = serializers.CharField(max_length=200)
 
     def create(self, validated_data):
