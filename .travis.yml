@@ -21,7 +21,7 @@ install:
 before_script:
   - mysql -e 'create database codetime_db;'
 script:
-  - flake8 --max-line-length=150
+  - flake8 --max-line-length=200
   - sh travis.sh run_tests
   - python code/codetime_server/manage.py test codetime.tests
 
