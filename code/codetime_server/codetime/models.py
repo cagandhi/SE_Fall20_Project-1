@@ -198,7 +198,8 @@ class TimeLogManager(models.Manager):
         :return: list of count of logs per day of the user
         :rtype: list
         """
-        summary = self.raw(f"select 1 as log_file_time_id, dayname(log_date) day, count(distinct detected_language) count from log_file_time where api_token=\"{api_token}\" group by 1,2")
+        summary = self.raw(
+            f"select 1 as log_file_time_id, dayname(log_date) day, count(distinct detected_language) count from log_file_time where api_token=\"{api_token}\" group by 1,2")
 
         ans = []
         for entry in summary:
@@ -216,7 +217,8 @@ class TimeLogManager(models.Manager):
         :return: list of time spent per coding language for the user
         :rtype: list
         """
-        summary = self.raw(f'select 1 as log_file_time_id, detected_language, sum(end_timestamp - start_timestamp) total_time from log_file_time where api_token=\"{api_token}\" group by 1,2')
+        summary = self.raw(
+            f'select 1 as log_file_time_id, detected_language, sum(end_timestamp - start_timestamp) total_time from log_file_time where api_token=\"{api_token}\" group by 1,2')
 
         ans = []
         for entry in summary:

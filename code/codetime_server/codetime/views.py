@@ -1,5 +1,6 @@
 from rest_framework import generics
-from .request_handlers import handle_user_get, handle_user_post, handle_log_file_post, handle_summary_request, handle_get_file_logs
+from .request_handlers import handle_user_get, handle_user_post, handle_log_file_post, handle_summary_request, \
+    handle_get_file_logs
 from rest_framework.response import Response
 
 
@@ -20,7 +21,7 @@ class UserView(generics.ListCreateAPIView, generics.RetrieveUpdateDestroyAPIView
         User post/signup and login request
         """
         response = handle_user_post(request)
-        return Response(data=response,status=201)
+        return Response(data=response, status=201)
 
 
 class TimeLogView(generics.ListAPIView, generics.CreateAPIView):

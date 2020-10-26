@@ -94,7 +94,6 @@ def get_invalid_user_credentials(data=None):
 
 
 def handle_user_get(request):
-
     api_token = request.query_params.get("api_token", None)
 
     if api_token:
