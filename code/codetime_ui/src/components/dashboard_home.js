@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import {
     get_file_name_wise_time_spent,
     get_language_wise_time_spent,
-    get_language_wise_user_summary, get_overall_user_stats,
+    get_language_wise_user_summary, get_overall_user_stats, get_user_recent_stats,
     get_weekday_wise_user_summary
 } from "../api_calls/calls";
 import {Cell, Legend, LineChart, Pie, PieChart, Tooltip, CartesianGrid, XAxis, YAxis, Line, ResponsiveContainer} from "recharts";
@@ -112,6 +112,11 @@ export default class Dashboard_home extends PureComponent{
                     this.setState({overall_stats: data["data"][0]});
             })
 
+            get_user_recent_stats(api_token).then(data=>{
+                if(JSON.stringify(data["data"]) !== JSON.stringify([]))
+                    this.setState({recent_stats: data["data"]});
+            })
+
         }else{
             this.setState({api_token: undefined})
         }
@@ -147,6 +152,29 @@ export default class Dashboard_home extends PureComponent{
             }
         ]
 
+        const recent_stats_table = [
+            {
+                title: "Date",
+                key: "log_date",
+                dataIndex: "log_date"
+            },
+            {
+                title: "Files Count",
+                key: "file_count",
+                dataIndex: "file_count"
+            },
+            {
+                title: "Language Count",
+                key: "language_count",
+                dataIndex: "language_count"
+            },
+            {
+                title: "Total Time",
+                key: "total_time",
+                dataIndex: "total_time"
+            }
+        ]
+
         if(this.state.api_token === undefined || this.state.api_token === "undefined"){
             return(<Redirect to={"/login"}/>);
         }else if(this.state.api_token === ""){
@@ -154,22 +182,53 @@ export default class Dashboard_home extends PureComponent{
         }else{
             return (
                 <div style={{padding: "10px"}}>
-                    <Card title={"All Time Stats"} bodyStyle={{backgroundColor: "black"}} style={{padding: "10px"}}>
-                        <Row>
-                            <Col span={8} style={{padding: "10px"}}>
-                                {/*<Statistic style={{backgroundColor: "#00C49F", padding: "10px"}} title={"Total Programming Languages Used"} value={this.state.overall_stats.total_languages}/>*/}
-                                <Statistic style={{padding: "10px", backgroundColor: "white"}} title={"Total Programming Languages Used"} value={this.state.overall_stats.total_languages}/>
-                            </Col>
-                            <Col span={8} style={{padding: "10px"}}>
-                                {/*<Statistic style={{backgroundColor: "#FFBB28", padding: "10px"}} title={"Total Files Worked Upon"} value={this.state.overall_stats.total_files}/>*/}
-                                <Statistic style={{ padding: "10px", backgroundColor: "white"}} title={"Total Files Worked Upon"} value={this.state.overall_stats.total_files}/>
-                            </Col>
-                            <Col span={8} style={{padding: "10px"}}>
-                                {/*<Statistic style={{backgroundColor: "#FF8042", padding: "10px"}} title={"Total Time Coded"} value={this.state.overall_stats.total_time}/>*/}
-                                <Statistic style={{ padding: "10px", backgroundColor: "white"}} title={"Total Time Coded (Seconds)"} value={this.state.overall_stats.total_time}/>
-                            </Col>
-                        </Row>
-                    </Card>
+                    <Row style={{margin: "10px"}}>
+                        <Col span={24}>
+                            <Card title={"All Time Stats"} bodyStyle={{backgroundColor: "black"}} style={{padding: "10px"}}>
+                                <Row>
+                                    <Col span={8} style={{padding: "10px"}}>
+                                        {/*<Statistic style={{backgroundColor: "#00C49F", padding: "10px"}} title={"Total Programming Languages Used"} value={this.state.overall_stats.total_languages}/>*/}
+                                        <Statistic style={{padding: "10px", backgroundColor: "white"}} title={"Total Programming Languages Used"} value={this.state.overall_stats.total_languages}/>
+                                    </Col>
+                                    <Col span={8} style={{padding: "10px"}}>
+                                        {/*<Statistic style={{backgroundColor: "#FFBB28", padding: "10px"}} title={"Total Files Worked Upon"} value={this.state.overall_stats.total_files}/>*/}
+                                        <Statistic style={{ padding: "10px", backgroundColor: "white"}} title={"Total Files Worked Upon"} value={this.state.overall_stats.total_files}/>
+                                    </Col>
+                                    <Col span={8} style={{padding: "10px"}}>
+                                        {/*<Statistic style={{backgroundColor: "#FF8042", padding: "10px"}} title={"Total Time Coded"} value={this.state.overall_stats.total_time}/>*/}
+                                        <Statistic style={{ padding: "10px", backgroundColor: "white"}} title={"Total Time Coded (Seconds)"} value={this.state.overall_stats.total_time}/>
+                                    </Col>
+                                </Row>
+                            </Card>
+                        </Col>
+                    </Row>
+
+                    <Row style={{margin: "10px"}}>
+                        <Col span={24}>
+                             <Card title={"Last 30 days stats"}>
+                                 <Row>
+                                     <Col span={12}>
+                                         <Table dataSource={this.state.recent_stats} columns={recent_stats_table} pagination={false}/>
+                                     </Col>
+                                     <Col span={12}>
+                                         <ResponsiveContainer width="95%" height="95%">
+                                             <LineChart data={this.state.recent_stats}>
+                                                 <CartesianGrid strokeDasharray="3 3" />
+                                                 <XAxis dataKey="log_date" />
+                                                 <YAxis />
+                                                 <Tooltip />
+                                                 <Legend />
+                                                 {/*<Line type="monotone" dataKey="total_time" stroke="#8884d8" activeDot={{ r: 8 }} />*/}
+                                                 <Line type="monotone" dataKey="language_count" stroke="#8884d8" activeDot={{ r: 8 }} />
+                                                 <Line type="monotone" dataKey="file_count" stroke="#8884d8" activeDot={{ r: 8 }} />
+                                             </LineChart>
+                                         </ResponsiveContainer>
+                                     </Col>
+                                 </Row>
+                            </Card>
+                        </Col>
+                    </Row>
+
                     <Row>
                         <Col span={12} style={{padding: "10px"}}>
                             <Card title={"File extension wise file count worked on"}>
