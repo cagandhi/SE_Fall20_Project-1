@@ -37,7 +37,6 @@ export default class Account_info extends Component {
 
     render() {
 
-        console.log(this.state.api_token)
 
         if(this.state.api_token === undefined || this.state.api_token === "undefined"){
             return(<Redirect to={"/login"}/>);
