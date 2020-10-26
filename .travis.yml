@@ -8,12 +8,7 @@ services:
   - mysql
 
 env:
-  - MYSQL_CODE_TIME_DB_NAME=codetime_db
-  - MYSQL_CODE_TIME_USER=root
-  - MYSQL_CODE_TIME_PASSWORD=group18
-  - MYSQL_CODE_TIME_HOST=localhost
-  - MYSQL_CODE_TIME_CONNECTION_PORT=3306
-  - CODE_TIME_SECRET_KEY=Sample
+  - MYSQL_CODE_TIME_DB_NAME=codetime_db MYSQL_CODE_TIME_USER=root MYSQL_CODE_TIME_PASSWORD=group18 MYSQL_CODE_TIME_HOST=localhost MYSQL_CODE_TIME_CONNECTION_PORT=3306 CODE_TIME_SECRET_KEY=Sample
 
 before_install:
   - curl -OL https://raw.githubusercontent.com/SublimeText/UnitTesting/master/sbin/travis.sh
