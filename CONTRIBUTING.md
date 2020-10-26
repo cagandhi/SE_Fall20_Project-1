@@ -21,6 +21,18 @@ Thank you so much for taking an interest in contributing! We are lookng forward 
 
 Each contribution counts for our project. So make sure to classify which is yours.
 
+### Obvious Fixes
+
+The Obvious Fixes comprise of: 
+
+* Spelling / grammar fixes and Typo correction
+* Formatting changes
+* Comment and code clean up
+* Bug fixes that change default return values or error codes stored in constants
+* Adding logging messages or debugging output
+* Updating documentation
+
+One can go ahead and follow the [3-step process](#required-3-steps-for-contributing)
 
 ### Reporting Bugs
 
