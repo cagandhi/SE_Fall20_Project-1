@@ -54,6 +54,19 @@ def get_valid_output_response(data):
     return response
 
 
+def get_valid_post_response():
+    """
+    Returns success message correct processing of post/get request
+
+    :param str data: message
+    :return: response
+    :rtype: object
+    """
+    response = {"status": 201, "message": "Created"}
+
+    return response
+
+
 def get_something_went_wrong_response(data=None):
     """
     Returns error response for server related error
@@ -117,7 +130,7 @@ def handle_user_post(request):
                 )
 
                 if return_status:
-                    return get_valid_output_response(return_status)
+                    return get_valid_post_response()
                 else:
                     return get_invalid_user_credentials(request.data)
         else:

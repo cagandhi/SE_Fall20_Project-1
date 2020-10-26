@@ -7,24 +7,26 @@ class UserView(generics.ListCreateAPIView, generics.RetrieveUpdateDestroyAPIView
     """
     User View
     """
+
     def post(self, request, *args, **kwargs):
         """
         User post request
         """
         response = handle_user_post(request)
-        return Response(data=response)
+        return Response(data=response, status=response.get("status", 201))
 
 
 class TimeLogView(generics.ListAPIView, generics.CreateAPIView):
     """
     TimeLog View
     """
+
     def post(self, request, *args, **kwargs):
         """
         TimeLog post request
         """
         response = handle_log_file_post(request)
-        return Response(data=response, status=response.get("status", 200))
+        return Response(data=response, status=response.get("status", 201))
 
     def get(self, request, *args, **kwargs):
         """
