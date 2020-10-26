@@ -20,7 +20,6 @@ export async function signup(user_cred) {
 
 export async function login(user_cred) {
 
-
     const response = await fetch(server_endpoint + "/codetime/user/?type=login", {
         method: "POST",
         headers: {

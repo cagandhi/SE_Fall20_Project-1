@@ -37,7 +37,9 @@ export default class Login_home extends Component{
     }
 
     onFinish = (values) => {
+
         login(values).then(data=>{
+
             if(data["status"] === 200){
                 message.success({content: "Successfully login", duration: 2, style: {position: "fixed", left: "50%", top: "20%", color: "#316DC1"}})
                 Cookies.set("api_token", data["data"]["api_token"]);
@@ -46,6 +48,7 @@ export default class Login_home extends Component{
             else
                 message.error({content: data["message"], duration: 2, style: {position: "fixed", left: "50%", top: "20%", color: "#316DC1"}})
         })
+
     }
 
     onFinishFailed = (errorInfo) => {
