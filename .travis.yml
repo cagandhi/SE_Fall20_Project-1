@@ -23,5 +23,6 @@ before_script:
 script:
   - flake8 --max-line-length=200
   - sh travis.sh run_tests
-  - python code/codetime_server/manage.py test codetime.tests
-
+  - cd code/codetime_server/
+  - coverage run --source='.' manage.py test codetime
+  - coverage report
