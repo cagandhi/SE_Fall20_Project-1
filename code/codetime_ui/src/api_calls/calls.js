@@ -95,3 +95,31 @@ export async function get_file_name_wise_time_spent(api_token){
 
     return await response.json();
 }
+
+export async function get_overall_user_stats(api_token){
+
+    const response = await fetch(server_endpoint + "/codetime/summary/?api_token="+api_token+"&type=user_overall_stats", {
+        method: "GET",
+        headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json"
+        }
+    });
+
+    return await response.json();
+
+}
+
+export async function get_user_recent_stats(api_token){
+
+    const response = await fetch(server_endpoint + "/codetime/summary/?api_token="+api_token+"&type=recent_stats", {
+        method: "GET",
+        headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json"
+        }
+    });
+
+    return await response.json();
+
+}
