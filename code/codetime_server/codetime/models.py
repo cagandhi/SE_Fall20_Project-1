@@ -256,6 +256,18 @@ class TimeLogManager(models.Manager):
     
         return ans
     
+    def get_user_overall_stats(self, api_token):
+        
+        summary = self.raw(f'select 1 as log_file_time_id, api_token, count(distinct detected_language) total_languages, count(distinct file_name) total_files, sum(end_timestamp - start_timestamp) total_time from log_file_time where api_token = "{api_token}" group by 1,2')
+    
+        ans = []
+        
+        for entry in summary:
+            val = {"total_languages": entry.total_languages, "total_files": entry.total_files, "total_time": entry.total_time, "api_token": api_token}
+            ans.append(val)
+            
+        return ans
+
 
 class TimeLog(models.Model):
     '''
