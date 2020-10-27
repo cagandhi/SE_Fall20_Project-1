@@ -1,13 +1,15 @@
 ## Project Requirements
 
-1. The plugin should record the following data:
-*  Time spent on a specific file
-*  Time spent on a specific programming language.
-*  Time spent on specific project. 
 
-2. The plugin should produce the following results:
+#### Aim
+
+The project aim to monitor user's coding activities. Parameters include time taken on files, insights on time spent on coding languages. The project has a remote dashboard with user login. The dashboard is one stop for all the insights captured on coding activities. We capture data currently through Sublime plugin.
+
+1. The plugin at present records the following data:
+*  Time spent on a specific file
+*  Time spent on a specific programming language
+
+2. The plugin creates following insights and impacts:
 *  Rank the time spent on different programming languages
-*  Display the time spent on coding per hour on a daily basis.
-*  Display the time spent on different files. Rank the files based on time spent and show the amount of time spent in percentage.
-*  Display the time spent on a project in a number of days/hr. Rank the project based on time spent on them.
-*  Show the leaderboard of multiple developers at one single place where performance of all developers can be tracked.
+*  Display the time spent on coding per hour on a daily basis
+*  Display the time spent on different files 
