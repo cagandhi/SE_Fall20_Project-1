@@ -54,7 +54,7 @@ def get_valid_output_response(data):
     return response
 
 
-def get_valid_post_response():
+def get_valid_post_response(data):
     """
     Returns success message correct processing of post/get request
 
@@ -62,7 +62,7 @@ def get_valid_post_response():
     :return: response
     :rtype: object
     """
-    response = {"status": 201, "message": "Created"}
+    response = {"status": 201, "message": "Created", "data": data}
 
     return response
 
@@ -88,18 +88,17 @@ def get_invalid_user_credentials(data=None):
     :return: response
     :rtype: object
     """
-    response = {"status": 200, "message": "Invalid user credentials.", "data": data}
+    response = {"status": 401, "message": "Invalid user credentials.", "data": data}
 
     return response
 
 
 def handle_user_get(request):
-
     api_token = request.query_params.get("api_token", None)
 
     if api_token:
         response = User.objects.get_user_from_api_token(api_token=api_token)
-        return {"status": 0, "message": "Success", "data": response}
+        return get_valid_output_response(data=response)
 
 
 def handle_user_post(request):
@@ -127,11 +126,11 @@ def handle_user_post(request):
                     data = User.objects.get_user_from_username(
                         request.data["username"], request.data["password"]
                     )
-                    return get_valid_output_response(data)
+                    return get_valid_post_response(data)
                 elif return_status == 1:
                     return get_something_went_wrong_response(request.data)
                 elif return_status == 2:
-                    return {"status": 1, "message": "Username already taken.", "data": request.data}
+                    return {"status": 400, "message": "Username already taken.", "data": request.data}
             elif request_type == "login":
 
                 return_status = User.objects.get_user_from_username(
@@ -139,7 +138,7 @@ def handle_user_post(request):
                 )
 
                 if return_status:
-                    return get_valid_output_response(data=return_status)
+                    return get_valid_post_response(return_status)
                 else:
                     return get_invalid_user_credentials(request.data)
         else:
@@ -160,7 +159,7 @@ def handle_log_file_post(request):
     return_data = dict()
     return_data["created"] = []
     return_data["failed"] = []
-    return_status = 200
+    return_status = 201
 
     for data_point in request.data:
 
@@ -215,43 +214,43 @@ def handle_summary_request(request):
         if summary_type == "extension":
             response = TimeLog.objects.get_file_name_extension_wise_summary(api_token=api_token)
             return {
-                "status": 0,
+                "status": 200,
                 "data": response
             }
 
         elif summary_type == "weekday":
             response = TimeLog.objects.get_weekday_count_summary(api_token=api_token)
             return {
-                "status": 0,
+                "status": 200,
                 "data": response
             }
 
         elif summary_type == "language_total_time":
             response = TimeLog.objects.get_time_spent_per_coding_language(api_token=api_token)
             return {
-                "status": 0,
+                "status": 200,
                 "data": response
             }
 
         elif summary_type == "file_name_total_time":
             response = TimeLog.objects.get_time_spent_per_file(api_token=api_token)
             return {
-                "status": 0,
+                "status": 200,
                 "data": response
             }
-        
+
         elif summary_type == "user_overall_stats":
-            
+
             response = TimeLog.objects.get_user_overall_stats(api_token=api_token)
             return {
-                "status": 0,
+                "status": 200,
                 "data": response
             }
-        
+
         elif summary_type == "recent_stats":
-            
+
             response = TimeLog.objects.get_user_recent_stats(api_token=api_token)
             return {
-                "status": 0,
+                "status": 200,
                 "data": response
             }

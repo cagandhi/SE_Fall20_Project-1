@@ -15,6 +15,7 @@ before_install:
 
 install:
   - pip install flake8==3.5
+  - pip install coverage
   - sh travis.sh bootstrap
   - pip install -r code/codetime_server/requirements.txt
 
@@ -23,5 +24,7 @@ before_script:
 script:
   - flake8 --max-line-length=200
   - sh travis.sh run_tests
-  - python code/codetime_server/manage.py test codetime.tests
+  - cd code/codetime_server/
+  - coverage run --source='.' --omit=*sgi*,*apps* manage.py test codetime
+  - coverage report
 

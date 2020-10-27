@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils.crypto import get_random_string
-from django.utils.timezone import now
 from django.core import serializers
 import uuid
 import json
@@ -119,7 +118,7 @@ class User(models.Model):
     :ivar log_user_id: Primary key indexing each user
     :ivar username: unique username of the user
     :ivar password: password of the user
-    :ivar api_token: unique token for each user stored for sublime activity
+    :ivar api_token1: unique token for each user stored for sublime activity
     '''
 
     class Meta:
@@ -151,44 +150,6 @@ class TimeLogManager(models.Manager):
             return 1
         except Exception:
             return 1
-
-    def create_time_log(
-        self, api_token, file_name, file_extension, detected_language, log_date, log_timestamp
-    ):
-        """
-        Create a new log for a file for a particular user
-
-        :param str api_token: unique token for each user
-        :param str file_name: file being edited by user
-        :param str file_extension: extension of the file (or file type)
-        :param str detected_language: language in the file
-        :param str log_date: date of when was the file logged
-        :param str log_timestamp: time recorded for activity on file
-        :return: api_token on success
-        :rtype: str
-        """
-        try:
-            user = User.objects.filter(api_token=api_token).first()
-            file_log = self.filter(log_user_id=user, file_name=file_name).first()
-            if file_log is not None:
-                log_timestamp = file_log.log_timestamp + log_timestamp
-                self.filter(log_user_id=user, file_name=file_name).update(
-                    log_timestamp=log_timestamp, modified_at=now()
-                )
-            else:
-                self.create(
-                    log_user_id=user,
-                    file_name=file_name,
-                    file_extension=file_extension,
-                    detected_language=detected_language,
-                    log_date=log_date,
-                    log_timestamp=log_timestamp,
-                )
-
-            return api_token
-        except Exception as e:
-            print("error in creating logs for user ", e)
-            return e
 
     def get_time_logs(self, api_token):
         """
@@ -236,7 +197,8 @@ class TimeLogManager(models.Manager):
         :return: list of count of logs per day of the user
         :rtype: list
         """
-        summary = self.raw(f"select 1 as log_file_time_id, dayname(log_date) day, count(distinct detected_language) count from log_file_time where api_token=\"{api_token}\" group by 1,2")
+        summary = self.raw(
+            f"select 1 as log_file_time_id, dayname(log_date) day, count(distinct detected_language) count from log_file_time where api_token=\"{api_token}\" group by 1,2")
 
         ans = []
         for entry in summary:
@@ -254,7 +216,8 @@ class TimeLogManager(models.Manager):
         :return: list of time spent per coding language for the user
         :rtype: list
         """
-        summary = self.raw(f'select 1 as log_file_time_id, detected_language, sum(end_timestamp - start_timestamp) total_time from log_file_time where api_token=\"{api_token}\" group by 1,2')
+        summary = self.raw(
+            f'select 1 as log_file_time_id, detected_language, sum(end_timestamp - start_timestamp) total_time from log_file_time where api_token=\"{api_token}\" group by 1,2')
 
         ans = []
         for entry in summary:
@@ -270,7 +233,7 @@ class TimeLogManager(models.Manager):
 
         :param str api_token: unique token for each user
         :return: list of time spent per file for the user
-        :rtype
+        :rtype: list
         """
         summary = self.raw(
             f'select 1 as log_file_time_id, file_name, sum(end_timestamp - start_timestamp) total_time from log_file_time where api_token=\"{api_token}\" group by 1,2')
@@ -281,22 +244,22 @@ class TimeLogManager(models.Manager):
             ans.append(val)
 
         return ans
-    
+
     def get_user_overall_stats(self, api_token):
-        
-        summary = self.raw(f'select 1 as log_file_time_id, api_token, count(distinct detected_language) total_languages, count(distinct file_name) total_files, sum(end_timestamp - start_timestamp) total_time from log_file_time where api_token = "{api_token}" group by 1,2')
-    
+
+        summary = self.raw(f'select 1 as log_file_time_id, api_token, count(distinct detected_language) total_languages, count(distinct file_name) total_files, sum(end_timestamp - start_timestamp) total_time from log_file_time where api_token = "{api_token}" group by 1,2') # noqa E501
+
         ans = []
-        
+
         for entry in summary:
             val = {"total_languages": entry.total_languages, "total_files": entry.total_files, "total_time": entry.total_time, "api_token": api_token}
             ans.append(val)
-            
+
         return ans
 
     def get_user_recent_stats(self, api_token):
-        
-        summary = self.raw(f'select 1 as log_file_time_id, api_token, log_date, count(distinct file_name) file_count, count(distinct detected_language ) language_count, sum(end_timestamp - start_timestamp) total_time from log_file_time where api_token = "{api_token}" group by 1, 2, 3 order by 3 limit 30')
+
+        summary = self.raw(f'select 1 as log_file_time_id, api_token, log_date, count(distinct file_name) file_count, count(distinct detected_language ) language_count, sum(end_timestamp - start_timestamp) total_time from log_file_time where api_token = "{api_token}" group by 1, 2, 3 order by 3 limit 30') # noqa E501
         ans = []
 
         for entry in summary:
@@ -305,7 +268,7 @@ class TimeLogManager(models.Manager):
             ans.append(val)
 
         return ans
-    
+
 
 class TimeLog(models.Model):
     '''
