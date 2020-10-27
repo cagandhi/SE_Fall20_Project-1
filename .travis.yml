@@ -24,6 +24,6 @@ script:
   - flake8 --max-line-length=200
   - sh travis.sh run_tests
   - cd code/codetime_server/
-  - coverage run --source='.' --omit=*sgi*,*urls*,*apps* manage.py test codetime
+  - coverage run --source='.' --omit=*sgi*,*apps* manage.py test codetime
   - coverage report
 

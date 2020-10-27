@@ -238,19 +238,19 @@ def handle_summary_request(request):
                 "status": 200,
                 "data": response
             }
-        
+
         elif summary_type == "user_overall_stats":
-            
+
             response = TimeLog.objects.get_user_overall_stats(api_token=api_token)
             return {
-                "status": 0,
+                "status": 200,
                 "data": response
             }
-        
+
         elif summary_type == "recent_stats":
-            
+
             response = TimeLog.objects.get_user_recent_stats(api_token=api_token)
             return {
-                "status": 0,
+                "status": 200,
                 "data": response
             }
