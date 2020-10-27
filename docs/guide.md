@@ -1,5 +1,21 @@
 # Guide to install and start contributing
 
+## Contents
+
+- [Guide to install and start contributing](#guide-to-install-and-start-contributing)
+  - [Contents](#contents)
+  - [Plugin Installation for every user](#plugin-installation-for-every-user)
+  - [Usage](#usage)
+  - [Setup (For contributors)](#setup-for-contributors)
+  - [Django App](#django-app)
+    - [Django App Installation (For contributors)](#django-app-installation-for-contributors)
+    - [Django App Documentation (For contributors)](#django-app-documentation-for-contributors)
+  - [How to Run Tests (For contributors)](#how-to-run-tests-for-contributors)
+    - [For Sublime Plugin](#for-sublime-plugin)
+    - [For Django Web App](#for-django-web-app)
+  - [How to Run Linter](#how-to-run-linter)
+  - [How to run the Code Coverage](#how-to-run-the-code-coverage)
+
 ## Plugin Installation for every user
 
 1. Open Sublime Text.
@@ -26,7 +42,7 @@
 
 > <strong>Note:</strong> Please install and use Sublime Text 3 only for development.
 
-1. Perform the steps in the [Installation](https://github.com/oaaky/SE_Fall20_Project-1#installation-for-non-contributors) section described above.
+1. Perform the steps in the [Installation](#plugin-installation-for-every-user) section described above.
 2. Install Package Control by pressing `ctrl+shift+p (Win/Linux)` or `cmd+shift+p (Mac)`.
 3. Run `python setup.py install` to install all the dependencies.
 4. Back in Sublime Text, Open Package Control by pressing `ctrl+shift+p (Win/Linux)` or `cmd+shift+p (Mac)`. Navigate to option `Package Control: Install Package`. Install packages: `SublimeLinter`, `SublimeLinter-flake8`, `sublack`, `UnitTesting`.
@@ -45,17 +61,19 @@
 
 ```
 
-## Django App Installation (For contributors)
+## Django App
+
+### Django App Installation (For contributors)
 
 1. TBD
 
-## Django App Documentation (For contributors)
+### Django App Documentation (For contributors)
 
 Refer to the `WHAT` documentation of codetime_server over here: [docs](https://prithvipatl.github.io/docs/build/html/index.html)
 
-## How to Run Tests? (For contributors)
+## How to Run Tests (For contributors)
 
-#### For Sublime Plugin
+### For Sublime Plugin
 
 1. For local execution of the tests, make sure that the Sublime package `UnitTesting` is installed.
 2. Navigate to a test file in `tests` folder that you want to run your tests for.
@@ -64,14 +82,14 @@ Refer to the `WHAT` documentation of codetime_server over here: [docs](https://p
 
 For more information and guide on how to run tests, take a look at this [README.md by randy3k](https://github.com/randy3k/UnitTesting/blob/master/README.md). For examples on how to write tests for sublime plugin, take a look at this [Repo by randy3k](https://github.com/randy3k/UnitTesting-example).
 
-#### For Django Web App
+### For Django Web App
 
 1. Navigate to the folder `code/codetime_server` and run the command `manage.py test codetime`
 
-## How to Run Linter?
+## How to Run Linter
 
 1. Run the command `flake8 --max-line-length=200` from the root folder
 
-## How to run the Code Coverage?
+## How to run the Code Coverage
 
-1. From the root folder run the command `coverage run --source='.' --omit=sgi,urls,app`
+1. From the root folder run the command `coverage run --source='.' --omit=*sgi*,*app*`
