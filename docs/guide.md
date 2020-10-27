@@ -9,6 +9,8 @@
   - [Setup (For contributors)](#setup-for-contributors)
   - [Django App](#django-app)
     - [Django App Installation (For contributors)](#django-app-installation-for-contributors)
+      - [Requirements](#requirements)
+      - [Steps to follow for Django App setup](#steps-to-follow-for-django-app-setup)
     - [Django App Documentation (For contributors)](#django-app-documentation-for-contributors)
   - [How to Run Tests (For contributors)](#how-to-run-tests-for-contributors)
     - [For Sublime Plugin](#for-sublime-plugin)
@@ -65,7 +67,35 @@
 
 ### Django App Installation (For contributors)
 
-1. TBD
+#### Requirements
+
+1. `python --version` <br/>
+    >= 3.6
+2. `mysql --version` <br/>
+   [mysql Ver 14.14 Distrib 5.7.31](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/), for Linux (x86_64) using  EditLine wrapper
+3. [Django and code base requirements](../code/codetime_server/requirements.txt/requirements.txt)
+4. Linter, which adheres to PEP8 standards:`flake8`
+5. For auto code formatters, we have used `black` and we recommend the same.
+  
+> <strong>Note:</strong> We recommend using virtualenv. Also, always makemigrations and commit those new migration files to respository to keep track of changes to Database.
+
+#### Steps to follow for Django App setup
+
+1. Install MySQL Client, Use user `$DB_USER` and assign password `$DB_PASSWORD`
+2. Export the following variables, better add to user profile:
+   1. `export MYSQL_CODE_TIME_DB_NAME=codetime_db`
+   2. `export MYSQL_CODE_TIME_USER=$DB_USER`
+   3. `export MYSQL_CODE_TIME_PASSWORD=$DB_PASSWORD`
+   4. `export MYSQL_CODE_TIME_HOST=localhost`
+   5. `export MYSQL_CODE_TIME_CONNECTION_PORT=3306`
+   6. `export CODE_TIME_SECRET_KEY=Sample`
+3. Install all the [requirements](../code/codetime_server/requirements.txt/requirements.txt)) in your environment.
+4. Go to the codetime_server folder tree, `cd code/codetime_server`
+5. Run following commands:
+   1. `python manage.py makemigrations`
+   2. `python manage.py migrate`
+   3. Finally run server on port 8000:
+      1. `python manage.py runserver 0.0.0.0:8000`
 
 ### Django App Documentation (For contributors)
 
