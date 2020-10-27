@@ -5,7 +5,7 @@
 
 # Scenario: # Enter scenario name here
 # Enter steps here
-import datetime
+
 import copy
 import time
 from django.test import TestCase, Client
