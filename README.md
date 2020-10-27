@@ -12,7 +12,9 @@
 
 - The online dashboard can be used to track the developers' productivity and view charts displaying how much time the user spent on each kind of file they worked on.
 
-[Project Requirement](docs/Project_Requirements.md) | [Architecture](docs/architecure.png) | [Web Dashboard TBD](docs/CodeTimeDashboard.png) | [Installation and Usage Guide](docs/guide.md)
+[Project Requirement](docs/Project_Requirements.md) | [Architecture](docs/architecure.png) | [Web Dashboard TBD](docs/CodeTimeDashboard.png) | [Installation and Usage Guide](docs/guide.md) | [Phase 3 Test Plan](test-plan.md)
+
+## Advertisement Video
 
 [![CodeTime](https://img.youtube.com/vi/lnOyBFZFu7g/0.jpg)](https://youtu.be/lnOyBFZFu7g)
 
