@@ -19,6 +19,6 @@ from django.conf.urls import url, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('admin/doc/', include('django.contrib.admindocs.urls')) ,
+    path('admin/doc/', include('django.contrib.admindocs.urls')),
     url('codetime/', include('codetime.urls'), name='codetime')
 ]
