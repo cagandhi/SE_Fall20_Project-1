@@ -118,7 +118,7 @@ class User(models.Model):
     :ivar log_user_id: Primary key indexing each user
     :ivar username: unique username of the user
     :ivar password: password of the user
-    :ivar api_token: unique token for each user stored for sublime activity
+    :ivar api_token1: unique token for each user stored for sublime activity
     '''
 
     class Meta:
@@ -233,7 +233,7 @@ class TimeLogManager(models.Manager):
 
         :param str api_token: unique token for each user
         :return: list of time spent per file for the user
-        :rtype
+        :rtype: list
         """
         summary = self.raw(
             f'select 1 as log_file_time_id, file_name, sum(end_timestamp - start_timestamp) total_time from log_file_time where api_token=\"{api_token}\" group by 1,2')

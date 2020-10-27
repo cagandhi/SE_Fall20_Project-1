@@ -1,0 +1,868 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>codetime package &#8212; codetime 1.2 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="codetime.tests package" href="codetime.tests.html" />
+    <link rel="prev" title="manage module" href="manage.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="codetime-package">
+<h1>codetime package<a class="headerlink" href="#codetime-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="codetime.tests.html">codetime.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="codetime.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="codetime.tests.html#module-codetime.tests.tests_url">codetime.tests.tests_url module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="codetime.tests.html#module-codetime.tests.test_views">codetime.tests.test_views module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="codetime.tests.html#module-codetime.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-codetime.admin">
+<span id="codetime-admin-module"></span><h2>codetime.admin module<a class="headerlink" href="#module-codetime.admin" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-codetime.apps">
+<span id="codetime-apps-module"></span><h2>codetime.apps module<a class="headerlink" href="#module-codetime.apps" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="codetime.apps.CodetimeConfig">
+<em class="property">class </em><code class="sig-prename descclassname">codetime.apps.</code><code class="sig-name descname">CodetimeConfig</code><span class="sig-paren">(</span><em class="sig-param">app_name</em>, <em class="sig-param">app_module</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.apps.CodetimeConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.apps.config.AppConfig</span></code></p>
+<dl class="attribute">
+<dt id="codetime.apps.CodetimeConfig.name">
+<code class="sig-name descname">name</code><em class="property"> = 'codetime'</em><a class="headerlink" href="#codetime.apps.CodetimeConfig.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-codetime.models">
+<span id="codetime-models-module"></span><h2>codetime.models module<a class="headerlink" href="#module-codetime.models" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="codetime.models.TimeLog">
+<em class="property">class </em><code class="sig-prename descclassname">codetime.models.</code><code class="sig-name descname">TimeLog</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.models.TimeLog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Description for Time Logging DB Model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#codetime.models.TimeLog.log_file_time_id" title="codetime.models.TimeLog.log_file_time_id"><strong>log_file_time_id</strong></a> – Primary key indexing each time log of a file of a user</p></li>
+<li><p><a class="reference internal" href="#codetime.models.TimeLog.api_token" title="codetime.models.TimeLog.api_token"><strong>api_token</strong></a> – unique token for each user</p></li>
+<li><p><a class="reference internal" href="#codetime.models.TimeLog.file_name" title="codetime.models.TimeLog.file_name"><strong>file_name</strong></a> – file being edited by user</p></li>
+<li><p><a class="reference internal" href="#codetime.models.TimeLog.file_extension" title="codetime.models.TimeLog.file_extension"><strong>file_extension</strong></a> – extension of the file (or file type)</p></li>
+<li><p><a class="reference internal" href="#codetime.models.TimeLog.detected_language" title="codetime.models.TimeLog.detected_language"><strong>detected_language</strong></a> – language in the file</p></li>
+<li><p><a class="reference internal" href="#codetime.models.TimeLog.log_date" title="codetime.models.TimeLog.log_date"><strong>log_date</strong></a> – date of when was the file logged</p></li>
+<li><p><a class="reference internal" href="#codetime.models.TimeLog.start_timestamp" title="codetime.models.TimeLog.start_timestamp"><strong>start_timestamp</strong></a> – start time recorded for activity on file</p></li>
+<li><p><a class="reference internal" href="#codetime.models.TimeLog.end_timestamp" title="codetime.models.TimeLog.end_timestamp"><strong>end_timestamp</strong></a> – end time recorded for activity on file</p></li>
+<li><p><a class="reference internal" href="#codetime.models.TimeLog.created_at" title="codetime.models.TimeLog.created_at"><strong>created_at</strong></a> – timestamp of when file was created</p></li>
+<li><p><a class="reference internal" href="#codetime.models.TimeLog.modified_at" title="codetime.models.TimeLog.modified_at"><strong>modified_at</strong></a> – timestamp of when file was modified last</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="exception">
+<dt id="codetime.models.TimeLog.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#codetime.models.TimeLog.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="codetime.models.TimeLog.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#codetime.models.TimeLog.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="codetime.models.TimeLog.api_token">
+<code class="sig-name descname">api_token</code><a class="headerlink" href="#codetime.models.TimeLog.api_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="codetime.models.TimeLog.created_at">
+<code class="sig-name descname">created_at</code><a class="headerlink" href="#codetime.models.TimeLog.created_at" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="codetime.models.TimeLog.detected_language">
+<code class="sig-name descname">detected_language</code><a class="headerlink" href="#codetime.models.TimeLog.detected_language" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="codetime.models.TimeLog.end_timestamp">
+<code class="sig-name descname">end_timestamp</code><a class="headerlink" href="#codetime.models.TimeLog.end_timestamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="codetime.models.TimeLog.file_extension">
+<code class="sig-name descname">file_extension</code><a class="headerlink" href="#codetime.models.TimeLog.file_extension" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="codetime.models.TimeLog.file_name">
+<code class="sig-name descname">file_name</code><a class="headerlink" href="#codetime.models.TimeLog.file_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="codetime.models.TimeLog.get_next_by_created_at">
+<code class="sig-name descname">get_next_by_created_at</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">field=&lt;django.db.models.fields.DateTimeField: created_at&gt;</em>, <em class="sig-param">is_next=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.models.TimeLog.get_next_by_created_at" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="codetime.models.TimeLog.get_next_by_log_date">
+<code class="sig-name descname">get_next_by_log_date</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">field=&lt;django.db.models.fields.DateField: log_date&gt;</em>, <em class="sig-param">is_next=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.models.TimeLog.get_next_by_log_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="codetime.models.TimeLog.get_next_by_modified_at">
+<code class="sig-name descname">get_next_by_modified_at</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">field=&lt;django.db.models.fields.DateTimeField: modified_at&gt;</em>, <em class="sig-param">is_next=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.models.TimeLog.get_next_by_modified_at" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="codetime.models.TimeLog.get_previous_by_created_at">
+<code class="sig-name descname">get_previous_by_created_at</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">field=&lt;django.db.models.fields.DateTimeField: created_at&gt;</em>, <em class="sig-param">is_next=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.models.TimeLog.get_previous_by_created_at" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="codetime.models.TimeLog.get_previous_by_log_date">
+<code class="sig-name descname">get_previous_by_log_date</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">field=&lt;django.db.models.fields.DateField: log_date&gt;</em>, <em class="sig-param">is_next=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.models.TimeLog.get_previous_by_log_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="codetime.models.TimeLog.get_previous_by_modified_at">
+<code class="sig-name descname">get_previous_by_modified_at</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">field=&lt;django.db.models.fields.DateTimeField: modified_at&gt;</em>, <em class="sig-param">is_next=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.models.TimeLog.get_previous_by_modified_at" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="codetime.models.TimeLog.log_date">
+<code class="sig-name descname">log_date</code><a class="headerlink" href="#codetime.models.TimeLog.log_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="codetime.models.TimeLog.log_file_time_id">
+<code class="sig-name descname">log_file_time_id</code><a class="headerlink" href="#codetime.models.TimeLog.log_file_time_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="codetime.models.TimeLog.modified_at">
+<code class="sig-name descname">modified_at</code><a class="headerlink" href="#codetime.models.TimeLog.modified_at" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="codetime.models.TimeLog.objects">
+<code class="sig-name descname">objects</code><em class="property"> = &lt;codetime.models.TimeLogManager object&gt;</em><a class="headerlink" href="#codetime.models.TimeLog.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="codetime.models.TimeLog.start_timestamp">
+<code class="sig-name descname">start_timestamp</code><a class="headerlink" href="#codetime.models.TimeLog.start_timestamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="codetime.models.TimeLogManager">
+<em class="property">class </em><code class="sig-prename descclassname">codetime.models.</code><code class="sig-name descname">TimeLogManager</code><a class="headerlink" href="#codetime.models.TimeLogManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.manager.Manager</span></code></p>
+<dl class="method">
+<dt id="codetime.models.TimeLogManager.create_log">
+<em class="property">static </em><code class="sig-name descname">create_log</code><span class="sig-paren">(</span><em class="sig-param">time_log</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.models.TimeLogManager.create_log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new log for a file for a particular user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>time_log</strong> (<em>dict</em>) – validated time log details from post request</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>return status</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="codetime.models.TimeLogManager.get_file_name_extension_wise_summary">
+<code class="sig-name descname">get_file_name_extension_wise_summary</code><span class="sig-paren">(</span><em class="sig-param">api_token</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.models.TimeLogManager.get_file_name_extension_wise_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get fileextension wise log summary for a particular user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>api_token</strong> (<em>str</em>) – unique token for each user</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of all the file logs of the user</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="codetime.models.TimeLogManager.get_time_logs">
+<code class="sig-name descname">get_time_logs</code><span class="sig-paren">(</span><em class="sig-param">api_token</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.models.TimeLogManager.get_time_logs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all the filelogs for a particular user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>api_token</strong> (<em>str</em>) – unique token for each user</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of all the file logs of the user</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="codetime.models.TimeLogManager.get_time_spent_per_coding_language">
+<code class="sig-name descname">get_time_spent_per_coding_language</code><span class="sig-paren">(</span><em class="sig-param">api_token</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.models.TimeLogManager.get_time_spent_per_coding_language" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the record for time spent on various codeing languages
+for a particular user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>api_token</strong> (<em>str</em>) – unique token for each user</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of time spent per coding language for the user</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="codetime.models.TimeLogManager.get_time_spent_per_file">
+<code class="sig-name descname">get_time_spent_per_file</code><span class="sig-paren">(</span><em class="sig-param">api_token</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.models.TimeLogManager.get_time_spent_per_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the record for time spent on on each of the file
+for a particular user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>api_token</strong> (<em>str</em>) – unique token for each user</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of time spent per file for the user</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="codetime.models.TimeLogManager.get_weekday_count_summary">
+<code class="sig-name descname">get_weekday_count_summary</code><span class="sig-paren">(</span><em class="sig-param">api_token</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.models.TimeLogManager.get_weekday_count_summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get weekday’s summary for a particular user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>api_token</strong> (<em>str</em>) – unique token for each user</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of count of logs per day of the user</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="codetime.models.User">
+<em class="property">class </em><code class="sig-prename descclassname">codetime.models.</code><code class="sig-name descname">User</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.models.User" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.base.Model</span></code></p>
+<p>Description for User DB Model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#codetime.models.User.log_user_id" title="codetime.models.User.log_user_id"><strong>log_user_id</strong></a> – Primary key indexing each user</p></li>
+<li><p><a class="reference internal" href="#codetime.models.User.username" title="codetime.models.User.username"><strong>username</strong></a> – unique username of the user</p></li>
+<li><p><a class="reference internal" href="#codetime.models.User.password" title="codetime.models.User.password"><strong>password</strong></a> – password of the user</p></li>
+<li><p><strong>api_token1</strong> – unique token for each user stored for sublime activity</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="exception">
+<dt id="codetime.models.User.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#codetime.models.User.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="codetime.models.User.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#codetime.models.User.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.core.exceptions.MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="codetime.models.User.api_token">
+<code class="sig-name descname">api_token</code><a class="headerlink" href="#codetime.models.User.api_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="codetime.models.User.log_user_id">
+<code class="sig-name descname">log_user_id</code><a class="headerlink" href="#codetime.models.User.log_user_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="codetime.models.User.objects">
+<code class="sig-name descname">objects</code><em class="property"> = &lt;codetime.models.UserManager object&gt;</em><a class="headerlink" href="#codetime.models.User.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="codetime.models.User.password">
+<code class="sig-name descname">password</code><a class="headerlink" href="#codetime.models.User.password" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="codetime.models.User.username">
+<code class="sig-name descname">username</code><a class="headerlink" href="#codetime.models.User.username" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="codetime.models.UserManager">
+<em class="property">class </em><code class="sig-prename descclassname">codetime.models.</code><code class="sig-name descname">UserManager</code><a class="headerlink" href="#codetime.models.UserManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.db.models.manager.Manager</span></code></p>
+<p>APIs for the User
+Performs User actions (CRUD operations)
+for signup, login and updating user.</p>
+<dl class="method">
+<dt id="codetime.models.UserManager.create_user">
+<em class="property">static </em><code class="sig-name descname">create_user</code><span class="sig-paren">(</span><em class="sig-param">user</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.models.UserManager.create_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>user</strong> (<em>dict</em>) – validated user details from post request</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>response status (0 for failure, 1 for success and 2 for DB error)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="codetime.models.UserManager.get_user_from_api_token">
+<code class="sig-name descname">get_user_from_api_token</code><span class="sig-paren">(</span><em class="sig-param">api_token</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.models.UserManager.get_user_from_api_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the user details using the unique API token of the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>api_token</strong> (<em>str</em>) – unique apitoken of user</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dictionary response</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="codetime.models.UserManager.get_user_from_username">
+<code class="sig-name descname">get_user_from_username</code><span class="sig-paren">(</span><em class="sig-param">username</em>, <em class="sig-param">password</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.models.UserManager.get_user_from_username" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the user details using the login credentails (basic auth) of the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<em>str</em>) – username of the user</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – password of user</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dictionary response</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="codetime.models.UserManager.login">
+<code class="sig-name descname">login</code><span class="sig-paren">(</span><em class="sig-param">username</em>, <em class="sig-param">password</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.models.UserManager.login" title="Permalink to this definition">¶</a></dt>
+<dd><p>Login a user using basic auth</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<em>str</em>) – username of the user</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – password of user</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>api_token is such user exists</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="codetime.models.UserManager.update_user">
+<code class="sig-name descname">update_user</code><span class="sig-paren">(</span><em class="sig-param">user</em>, <em class="sig-param">api_token</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.models.UserManager.update_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update user information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>user</strong> (<em>dict</em>) – validated user details from post request</p></li>
+<li><p><strong>api_token</strong> (<em>str</em>) – unique apitoken of user</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>response status (0 for success, 1 for no such user with api_token)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-codetime.request_handlers">
+<span id="codetime-request-handlers-module"></span><h2>codetime.request_handlers module<a class="headerlink" href="#module-codetime.request_handlers" title="Permalink to this headline">¶</a></h2>
+<p>This modules has functions to handle all the supported commands for the
+codetime server’s APIs.</p>
+<dl class="function">
+<dt id="codetime.request_handlers.get_invalid_request_param">
+<code class="sig-prename descclassname">codetime.request_handlers.</code><code class="sig-name descname">get_invalid_request_param</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.request_handlers.get_invalid_request_param" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns error response for invalid request parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>error</strong> (<em>str</em>) – message</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>error_response</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="codetime.request_handlers.get_invalid_user_credentials">
+<code class="sig-prename descclassname">codetime.request_handlers.</code><code class="sig-name descname">get_invalid_user_credentials</code><span class="sig-paren">(</span><em class="sig-param">data=None</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.request_handlers.get_invalid_user_credentials" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns error response for invalid user credentials</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>str</em>) – message</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>response</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="codetime.request_handlers.get_missing_param_response">
+<code class="sig-prename descclassname">codetime.request_handlers.</code><code class="sig-name descname">get_missing_param_response</code><span class="sig-paren">(</span><em class="sig-param">data=None</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.request_handlers.get_missing_param_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns error response for missing parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>str</em>) – message</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>response</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="codetime.request_handlers.get_serializer_error_response">
+<code class="sig-prename descclassname">codetime.request_handlers.</code><code class="sig-name descname">get_serializer_error_response</code><span class="sig-paren">(</span><em class="sig-param">error</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.request_handlers.get_serializer_error_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns error response from serializer</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>error</strong> (<em>str</em>) – message</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>error_response</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="codetime.request_handlers.get_something_went_wrong_response">
+<code class="sig-prename descclassname">codetime.request_handlers.</code><code class="sig-name descname">get_something_went_wrong_response</code><span class="sig-paren">(</span><em class="sig-param">data=None</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.request_handlers.get_something_went_wrong_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns error response for server related error</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>str</em>) – message</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>response</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="codetime.request_handlers.get_valid_output_response">
+<code class="sig-prename descclassname">codetime.request_handlers.</code><code class="sig-name descname">get_valid_output_response</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.request_handlers.get_valid_output_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns success message correct processing of post/get request</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>str</em>) – message</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>response</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="codetime.request_handlers.get_valid_post_response">
+<code class="sig-prename descclassname">codetime.request_handlers.</code><code class="sig-name descname">get_valid_post_response</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.request_handlers.get_valid_post_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns success message correct processing of post/get request</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>str</em>) – message</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>response</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="codetime.request_handlers.handle_get_file_logs">
+<code class="sig-prename descclassname">codetime.request_handlers.</code><code class="sig-name descname">handle_get_file_logs</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.request_handlers.handle_get_file_logs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handler for get request to obtain all records for a user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>GET request</strong> (<em>HTTP</em>) – request</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>response</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="codetime.request_handlers.handle_log_file_post">
+<code class="sig-prename descclassname">codetime.request_handlers.</code><code class="sig-name descname">handle_log_file_post</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.request_handlers.handle_log_file_post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handler for post request made by logging files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>POST request</strong> (<em>HTTP</em>) – request</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>response</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="codetime.request_handlers.handle_summary_request">
+<code class="sig-prename descclassname">codetime.request_handlers.</code><code class="sig-name descname">handle_summary_request</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.request_handlers.handle_summary_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handler for get request to summary records for a user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>GET request</strong> (<em>HTTP</em>) – request</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>response</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="codetime.request_handlers.handle_user_get">
+<code class="sig-prename descclassname">codetime.request_handlers.</code><code class="sig-name descname">handle_user_get</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.request_handlers.handle_user_get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="codetime.request_handlers.handle_user_post">
+<code class="sig-prename descclassname">codetime.request_handlers.</code><code class="sig-name descname">handle_user_post</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.request_handlers.handle_user_post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handler for post request made by a user to signup and login</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>POST request</strong> (<em>HTTP</em>) – message</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>response</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-codetime.serializers">
+<span id="codetime-serializers-module"></span><h2>codetime.serializers module<a class="headerlink" href="#module-codetime.serializers" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="codetime.serializers.TimeLogSerializer">
+<em class="property">class </em><code class="sig-prename descclassname">codetime.serializers.</code><code class="sig-name descname">TimeLogSerializer</code><span class="sig-paren">(</span><em class="sig-param">instance=None</em>, <em class="sig-param">data=&lt;class 'rest_framework.fields.empty'&gt;</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.serializers.TimeLogSerializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.Serializer</span></code></p>
+<p>TimeLog Serializer</p>
+<dl class="method">
+<dt id="codetime.serializers.TimeLogSerializer.create">
+<code class="sig-name descname">create</code><span class="sig-paren">(</span><em class="sig-param">validated_data</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.serializers.TimeLogSerializer.create" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="codetime.serializers.TimeLogSerializer.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">instance</em>, <em class="sig-param">validated_data</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.serializers.TimeLogSerializer.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="codetime.serializers.UserSerializer">
+<em class="property">class </em><code class="sig-prename descclassname">codetime.serializers.</code><code class="sig-name descname">UserSerializer</code><span class="sig-paren">(</span><em class="sig-param">instance=None</em>, <em class="sig-param">data=&lt;class 'rest_framework.fields.empty'&gt;</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.serializers.UserSerializer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.serializers.Serializer</span></code></p>
+<p>User Serializer</p>
+<dl class="method">
+<dt id="codetime.serializers.UserSerializer.create">
+<code class="sig-name descname">create</code><span class="sig-paren">(</span><em class="sig-param">validated_data</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.serializers.UserSerializer.create" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="codetime.serializers.UserSerializer.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">instance</em>, <em class="sig-param">validated_data</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.serializers.UserSerializer.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-codetime.urls">
+<span id="codetime-urls-module"></span><h2>codetime.urls module<a class="headerlink" href="#module-codetime.urls" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-codetime.views">
+<span id="codetime-views-module"></span><h2>codetime.views module<a class="headerlink" href="#module-codetime.views" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="codetime.views.TimeLogSummaryView">
+<em class="property">class </em><code class="sig-prename descclassname">codetime.views.</code><code class="sig-name descname">TimeLogSummaryView</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.views.TimeLogSummaryView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.generics.ListAPIView</span></code></p>
+<p>TimeLog Summary View</p>
+<dl class="method">
+<dt id="codetime.views.TimeLogSummaryView.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.views.TimeLogSummaryView.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>TimeLogSummary get request</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="codetime.views.TimeLogView">
+<em class="property">class </em><code class="sig-prename descclassname">codetime.views.</code><code class="sig-name descname">TimeLogView</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.views.TimeLogView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.generics.ListAPIView</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.generics.CreateAPIView</span></code></p>
+<p>TimeLog View</p>
+<dl class="method">
+<dt id="codetime.views.TimeLogView.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.views.TimeLogView.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>TimeLog get request</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="codetime.views.TimeLogView.post">
+<code class="sig-name descname">post</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.views.TimeLogView.post" title="Permalink to this definition">¶</a></dt>
+<dd><p>TimeLog post request</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="codetime.views.UserView">
+<em class="property">class </em><code class="sig-prename descclassname">codetime.views.</code><code class="sig-name descname">UserView</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.views.UserView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.generics.ListCreateAPIView</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">rest_framework.generics.RetrieveUpdateDestroyAPIView</span></code></p>
+<p>User View</p>
+<dl class="method">
+<dt id="codetime.views.UserView.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.views.UserView.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>User get request</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="codetime.views.UserView.post">
+<code class="sig-name descname">post</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#codetime.views.UserView.post" title="Permalink to this definition">¶</a></dt>
+<dd><p>User post/signup and login request</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-codetime">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-codetime" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">codetime</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="manage.html">manage module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">codetime package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-codetime.admin">codetime.admin module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-codetime.apps">codetime.apps module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-codetime.models">codetime.models module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-codetime.request_handlers">codetime.request_handlers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-codetime.serializers">codetime.serializers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-codetime.urls">codetime.urls module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-codetime.views">codetime.views module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-codetime">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="codetime.tests.html">codetime.tests package</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="manage.html" title="previous chapter">manage module</a></li>
+      <li>Next: <a href="codetime.tests.html" title="next chapter">codetime.tests package</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, ayushi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/codetime.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

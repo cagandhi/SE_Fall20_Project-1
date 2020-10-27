@@ -6,21 +6,33 @@
 ![GitHub](https://img.shields.io/badge/language-python-blue.svg)
 ![GitHub issues](https://img.shields.io/github/issues/adarshtri/CodeTime)
 
+## Test plan for Phase 3
+
+- [Phase 3 Test Plan](test-plan.md)
+
 ## About CodeTime
 
 - CodeTime is a plugin for Sublime Text editor which will help developers to track the amount of time spent on multiple files, programming languages and projects. The user will be able to perform the analysis of the time spent to improve the productivity by analysing the most frequently used programming language, most productive time of the day, files in project which took maximum time for development and projects which took maximum time for completion.
 
-- The developer can add the project deadlines to the plugin and the plugin can help developers stick to their goal by predicting the finish time of the project based on the data gathered from the user. Multiple developers can compete with each other through a leaderboard where a leaderboard will display the ranking of most productive developer and admin/manager can easily monitor the productivity of each and every developer with the help of a common interface.
+- The online dashboard can be used to track the developers' productivity and view charts displaying how much time the user spent on each kind of file they worked on.
 
-[Project Requirement](docs/Project_Requirements.md) | [Architecture](docs/architecure.png) | [UI MockUps](docs/Capture.PNG) | [Working Dashboard](docs/CodeTimeDashboard.png) | [Installation and Usage Guide](docs/guide.md)
+[Project Requirement](docs/Project_Requirements.md) | [Architecture](docs/architecure.png) | [Web Dashboard TBD](docs/CodeTimeDashboard.png) | [Installation and Developers Guide](docs/guide.md) | [Phase 3 Test Plan](test-plan.md)
+
+## Advertisement Video
 
 [![CodeTime](https://img.youtube.com/vi/lnOyBFZFu7g/0.jpg)](https://youtu.be/lnOyBFZFu7g)
+
+## Working Video
+
+[![CodeTime](https://img.youtube.com/vi/E7EuaExx8Ww/0.jpg)](https://youtu.be/E7EuaExx8Ww)
 
 ## How to Contribute
 
 Please take a look at our CONTRIBUTING.md where we provide instructions on contributing to the repo and taking the plugin development further.
 
-## What things have been done for Phase 1
+[Installation and Developers Guide](docs/guide.md)
+
+## What things have been done for Phase 1 (By previous project team)
 
 - Created the design and architecture of the project
 - Implemented the logic to collect the data in background
@@ -29,9 +41,9 @@ Please take a look at our CONTRIBUTING.md where we provide instructions on contr
 - Unit tests
 - Build and Packaging of the plugin
 
-## What is being done for Phase 2
+## What things have been done for Phase 2
 
 - The data generated is being sent to Django based server.
 - Local data analysis will be shifted to user dashboard on server.
-- Leaderboard based on user's usage of files.
-- Possible realtime analysis of the user's file.
+- Realtime analysis of the user's file.
+
