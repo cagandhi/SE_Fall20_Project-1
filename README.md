@@ -43,4 +43,4 @@ Please take a look at our CONTRIBUTING.md where we provide instructions on contr
 
 ## Test plan for Phase 3
 
-- TBD
+- [Phase 3 Test Plan](test-plan.md)
