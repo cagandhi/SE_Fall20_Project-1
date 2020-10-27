@@ -20,3 +20,4 @@ The whole debugging process should be conducted in following fashion to benchmar
 
   - Make sure the user debugging the code has codetime installed and account logged in with api token configured so that data sync happens seemlessly.
   - The same user debugs the code, and the level of difficulty of bugs in both the scenarios should be comparable.
+  - When we talk about delays in time reading, we don't mean error rates in minutes. They could be as small as few seconds. CodeTime is just a tool which aims to make result capturing more accurate.
