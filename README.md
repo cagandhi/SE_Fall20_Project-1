@@ -34,3 +34,7 @@ Please take a look at our CONTRIBUTING.md where we provide instructions on contr
 - The data generated is being sent to Django based server.
 - Local data analysis will be shifted to user dashboard on server.
 - Realtime analysis of the user's file.
+
+## Test plan for Phase 3
+
+- TBD
