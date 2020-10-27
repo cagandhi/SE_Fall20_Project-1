@@ -1,14 +1,18 @@
-# Reference :  Setup script documentation 
+# Reference :  Setup script documentation
 # https://setuptools.readthedocs.io/en/latest/setuptools.html
 
 from setuptools import setup, find_packages
+
 
 def get_requirements(filename):
     with open(filename) as f:
         requirements = f.read().splitlines()
     return requirements
 
+
 setup(name='codeTime',
+      setup_requires=['pytest-runner', 'pytest-pylint'],
+      tests_require=['pytest', 'pylint'],
       version='1.0',
       description='CSC 510: Software Engineering Project 1',
       author='Omkar Kulkarni',
@@ -16,6 +20,5 @@ setup(name='codeTime',
       license="MIT",
       packages=find_packages(),
       python_requires=">=3.3",
-      install_requires = get_requirements("requirements.txt"),
-      include_package_data=True,
-     )
+      install_requires=get_requirements("requirements.txt"),
+      )
