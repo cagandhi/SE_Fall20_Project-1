@@ -15,6 +15,7 @@
 [Project Requirement](docs/Project_Requirements.md) | [Architecture](docs/architecure.png) | [Web Dashboard TBD](docs/CodeTimeDashboard.png) | [Installation and Usage Guide](docs/guide.md)
 
 [![CodeTime](https://img.youtube.com/vi/lnOyBFZFu7g/0.jpg)](https://youtu.be/lnOyBFZFu7g)
+[![CodeTime](https://img.youtube.com/vi/E7EuaExx8Ww/0.jpg)](https://youtu.be/E7EuaExx8Ww)
 
 ## How to Contribute
 
