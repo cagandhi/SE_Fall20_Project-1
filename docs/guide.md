@@ -49,6 +49,10 @@
 
 1. TBD
 
+## Django App Documentation (For contributors)
+
+Refer to the `WHAT` documentation of codetime_server over here: [docs](https://prithvipatl.github.io/docs/build/html/index.html)
+
 ## How to Run Tests? (For contributors)
 
 #### For Sublime Plugin
