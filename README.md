@@ -6,6 +6,10 @@
 ![GitHub](https://img.shields.io/badge/language-python-blue.svg)
 ![GitHub issues](https://img.shields.io/github/issues/adarshtri/CodeTime)
 
+## Test plan for Phase 3
+
+- [Phase 3 Test Plan](test-plan.md)
+
 ## About CodeTime
 
 - CodeTime is a plugin for Sublime Text editor which will help developers to track the amount of time spent on multiple files, programming languages and projects. The user will be able to perform the analysis of the time spent to improve the productivity by analysing the most frequently used programming language, most productive time of the day, files in project which took maximum time for development and projects which took maximum time for completion.
@@ -41,6 +45,3 @@ Please take a look at our CONTRIBUTING.md where we provide instructions on contr
 - Local data analysis will be shifted to user dashboard on server.
 - Realtime analysis of the user's file.
 
-## Test plan for Phase 3
-
-- [Phase 3 Test Plan](test-plan.md)
